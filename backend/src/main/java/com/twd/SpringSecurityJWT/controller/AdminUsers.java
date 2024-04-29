@@ -23,17 +23,17 @@ public class AdminUsers {
         return ResponseEntity.ok(productRepo.findAll());
     }
 
-    @PostMapping("/admin/saveproduct")
-    public ResponseEntity<Object> signUp(@RequestBody ReqRes productRequest){
-        Product productToSave = new Product();
-        productToSave.setName(productRequest.getName());
-        return ResponseEntity.ok(productRepo.save(productToSave));
-    }
+//    @PostMapping("/admin/saveproduct")
+//    public ResponseEntity<Object> signUp(@RequestBody ReqRes productRequest){
+//        Product productToSave = new Product();
+//        productToSave.setName(productRequest.getName());
+//        return ResponseEntity.ok(productRepo.save(productToSave));
+//    }
 
 
     @GetMapping("/user/alone")
     public ResponseEntity<Object> userAlone(){
-        return ResponseEntity.ok("USers alone can access this ApI only");
+        return ResponseEntity.ok("Users alone can access this ApI only");
     }
 
     @GetMapping("/adminuser/both")

@@ -26,4 +26,14 @@ public class ReqRes {
     private String password;
     private List<Product> products;
     private OurUsers ourUsers;
+
+    /////
+    private String nameProduct;
+    private String decriptionProduct;
+    private Double priceProduct;
+    private Long stockProduct;
+    private Long categoryId;
+
+    ///////
+
 }

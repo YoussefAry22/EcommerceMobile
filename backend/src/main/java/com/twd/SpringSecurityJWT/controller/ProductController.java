@@ -20,7 +20,7 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    
+
 
     @PostMapping("/add")
     public Product addProduct(@RequestBody ReqRes productRequest, @AuthenticationPrincipal OurUsers user) {

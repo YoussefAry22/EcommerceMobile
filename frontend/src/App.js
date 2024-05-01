@@ -31,6 +31,7 @@ import CartProducts from './pages/CartProducts';
 import SignIn from './pages/SignIn';
 import SignUpPage from './pages/SignUp';
 import SignInPage from './pages/SignIn';
+import Profile from './pages/Profile';
 
 setupIonicReact({});
 
@@ -74,6 +75,9 @@ const App = () => {
 					<Route path="/signup" exact>
 						<SignUpPage />
 					</Route>
+					<Route path="/profile" exact>
+                <Profile />
+              </Route>
 				</IonRouterOutlet>
 			</IonReactRouter>
 		</IonApp>

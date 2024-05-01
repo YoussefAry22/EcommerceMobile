@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom'; // Import useHistory hook
+
 import {
   IonPage,
   IonContent,
@@ -16,15 +19,53 @@ const SignUpPage = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [storage, setStorage] = useState(null);
+	const [auth, setAuth] = useState(false);
 
+
+
+
+
+  useEffect(() => {
+    const initializeStorage = async () => {
+        const storage = new Storage();
+        await storage.create();
+        setStorage(storage);
+        const token = await storage.get("token");
+  console.log(token)
+  if(token){
+    setAuth(true);
+
+  }
+  console.log(auth)
+  
+    };
+
+    initializeStorage();
+}, [auth]);
   const handleSignUp = () => {
-    // La logique d'inscription sera implémentée ici
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Email:", email);
-    console.log("Password:", password);
+    
+    const userData = {
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      password: password,
+      role: "USER"
+    };
+  
+    axios.post('http://localhost:8080/auth/signup', userData)
+      .then(response => {
+        // Handle successful signup here
+        console.log("Signup successful!");
+        history.push('/signin'); // Redirect to /signin after successful signup
+      })
+      .catch(error => {
+        // Handle errors
+        console.error("Signup failed:", error);
+      });
   };
-
+  if(!auth){
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding" scrollY={false}>
@@ -95,7 +136,7 @@ const SignUpPage = () => {
         </IonGrid>
       </IonContent>
     </IonPage>
-  );
+  );}else{ history.push("/home");}
 };
 
 export default SignUpPage;

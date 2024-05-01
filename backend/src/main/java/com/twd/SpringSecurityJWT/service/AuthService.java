@@ -30,6 +30,8 @@ public class AuthService {
             ourUsers.setEmail(registrationRequest.getEmail());
             ourUsers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             ourUsers.setRole(registrationRequest.getRole());
+            ourUsers.setFirstname(registrationRequest.getFirstname());
+            ourUsers.setLastname(registrationRequest.getLastname());
             OurUsers ourUserResult = ourUserRepo.save(ourUsers);
             if (ourUserResult != null && ourUserResult.getId()>0) {
                 resp.setOurUsers(ourUserResult);

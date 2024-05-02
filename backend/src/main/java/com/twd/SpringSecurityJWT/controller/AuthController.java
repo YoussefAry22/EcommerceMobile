@@ -28,4 +28,9 @@ public class AuthController {
     public ResponseEntity<ReqRes> refreshToken(@RequestBody ReqRes refreshTokenRequest){
         return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
     }
+    ////////
+    @PostMapping("/signinasadmin")
+    public ResponseEntity<ReqRes> signInAsAdmin(@RequestBody ReqRes signInRequest){
+        return ResponseEntity.ok(authService.signInAsAdmin(signInRequest));
+    }
 }

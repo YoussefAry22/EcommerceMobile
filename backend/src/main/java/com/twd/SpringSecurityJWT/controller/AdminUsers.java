@@ -3,10 +3,13 @@ package com.twd.SpringSecurityJWT.controller;
 import com.twd.SpringSecurityJWT.dto.ReqRes;
 import com.twd.SpringSecurityJWT.entity.Product;
 import com.twd.SpringSecurityJWT.repository.ProductRepo;
+import com.twd.SpringSecurityJWT.service.OurUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +20,9 @@ public class AdminUsers {
 
     @Autowired
     private ProductRepo productRepo;
+
+    @Autowired
+    private OurUsersService ourUsersService;
 
     @GetMapping("/public/product")
     public ResponseEntity<Object> getAllProducts(){
@@ -49,5 +55,11 @@ public class AdminUsers {
         System.out.println(authentication.getDetails()); // get remote ip
         System.out.println(authentication.getName()); //returns the email because the email is the unique identifier
         return authentication.getName(); // returns the email
+    }
+
+    @GetMapping("/admin/info")
+    public ResponseEntity<ReqRes> getUserProfile(@AuthenticationPrincipal UserDetails userDetails) {
+        ReqRes response = ourUsersService.getAdminProfile(userDetails);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 }

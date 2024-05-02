@@ -22,9 +22,11 @@ const Home = () => {
             await storage.create();
             setStorage(storage);
             const data = await storage.get("user");
+            console.log("data")
 			console.log(data);
             setUserData(()=>data);
             setLoading(false);
+            console.log("userData")
 			console.log(userData);
 
         };
@@ -39,7 +41,7 @@ const Home = () => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <IonRouterLink routerLink="/profile" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
                 <IonAvatar aria-hidden="true">
-                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                    <img alt="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg"  />
                 </IonAvatar>
             </IonRouterLink>
             {userData && (

@@ -13,4 +13,5 @@ public class OurUsersController {
     public OurUsers getUserInfo(@AuthenticationPrincipal OurUsers user) {
         return user;
     }
+
 }

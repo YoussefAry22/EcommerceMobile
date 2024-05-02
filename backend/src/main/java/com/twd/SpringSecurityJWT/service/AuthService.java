@@ -81,4 +81,30 @@ public class AuthService {
         response.setStatusCode(500);
         return response;
     }
+
+    public ReqRes signInAsAdmin(ReqRes signinRequest){
+        ReqRes response = new ReqRes();
+
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getEmail(),signinRequest.getPassword()));
+            var user = ourUserRepo.findByEmail(signinRequest.getEmail()).orElseThrow();
+            if (!user.getRole().equals("ADMIN")) {
+                response.setStatusCode(403); // Forbidden
+                response.setMessage("Only Admins are allowed !");
+                return response;
+            }
+            System.out.println("Admin IS: "+ user);
+            var jwt = jwtUtils.generateToken(user);
+            var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
+            response.setStatusCode(200);
+            response.setToken(jwt);
+            response.setRefreshToken(refreshToken);
+            response.setExpirationTime("24Hr");
+            response.setMessage("Successfully Signed In as ADMIN");
+        }catch (Exception e){
+            response.setStatusCode(500);
+            response.setError(e.getMessage());
+        }
+        return response;
+    }
 }

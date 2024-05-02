@@ -63,8 +63,6 @@ const SignInAdmin = () => {
                 // Store the token in Ionic Storage
                 await storage.set("token", response.data.token);
 
-                // Redirect to "/home" after successful sign-in
-
                 await checkAuthAdmin();
                 window.location.href = "/dashboard";
 
@@ -135,7 +133,7 @@ const SignInAdmin = () => {
                 </IonContent>
             </IonPage>
         );
-    } else { history.push("/home"); }
+    } else { history.push("/dashboard"); }
 };
 
 export default SignInAdmin;

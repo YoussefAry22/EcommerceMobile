@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
-import { IonAvatar, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar,IonNote, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { cart, heart } from 'ionicons/icons';
 import { ProductStore } from '../data/ProductStore';
 import { FavouritesStore } from '../data/FavouritesStore';
 import { CartStore } from '../data/CartStore';
-import { useUser } from '../context/authContext';
-import { Storage } from '@ionic/storage';
 import { useAdmin } from '../context/authAdminContext';
+import { Storage } from '@ionic/storage';
 
-const Dashboard = () => {
-
+const DashboardAdmin = () => {
     const products = ProductStore.useState(s => s.products);
     const favourites = FavouritesStore.useState(s => s.product_ids);
     const shopCart = CartStore.useState(s => s.product_ids);
     const { admin } = useAdmin();
     const [storage, setStorage] = useState(null);
-    const [adminData, setAdminData] = useState(null);
+    const [adminData, setAdminData] = useState();
     const [loading, setLoading] = useState(true);
-
 
     useEffect(() => {
         const initializeStorage = async () => {
@@ -25,29 +22,29 @@ const Dashboard = () => {
             await storage.create();
             setStorage(storage);
             const data = await storage.get("admin");
+            console.log("dataaa");
             console.log(data);
-            setAdminData(() => data);
+            setAdminData(data); // Update adminData directly
             setLoading(false);
-            console.log("+++++")
-            console.log(adminData);
-
         };
+
         initializeStorage();
     }, [loading]);
-
+    console.log("adminDataffff")
+    console.log(adminData)
     return (
         <IonPage id="home-page">
             <IonHeader>
                 <IonToolbar>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <IonRouterLink routerLink="/profile" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
+                        <IonRouterLink routerLink="/adminprofil" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
                             <IonAvatar aria-hidden="true">
-                                <img alt="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                             </IonAvatar>
                         </IonRouterLink>
-                        {adminData && (
-                            <IonRouterLink routerLink="/profile" style={{ textDecoration: 'none', color: 'inherit', marginLeft: '8px' }}>
-                                <IonTitle>{adminData.firstname} {adminData.lastname}</IonTitle>
+                        {(adminData!=null) && (
+                            <IonRouterLink routerLink="/adminprofil">
+                                <IonNote style={{ textDecoration: 'none', color: 'blue', padding: '1em' }}>{adminData.firstname.charAt(0).toUpperCase()+ adminData.firstname.slice(1)} {adminData.lastname.toUpperCase()}</IonNote>
                             </IonRouterLink>
                         )}
                     </div>
@@ -63,6 +60,9 @@ const Dashboard = () => {
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
+
+
+
 
             <IonContent fullscreen>
                 <IonHeader collapse="condense">
@@ -92,4 +92,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default DashboardAdmin;

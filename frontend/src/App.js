@@ -33,7 +33,9 @@ import SignUpPage from './pages/SignUp';
 import SignInPage from './pages/SignIn';
 import Profile from './pages/Profile';
 import SignInAdmin from './pages/SignInAdmin';
-import Dashboard from './pages/Dashboard';
+import DashboardAdmin from './pages/DashboardAdmin';
+import ProfilAdmin from './pages/ProfilAdmin';
+
 
 setupIonicReact({});
 
@@ -77,9 +79,11 @@ const App = () => {
 							<SignInAdmin />
 						</Route>
 						<Route path="/dashboard" exact>
-							<Dashboard />
+							<DashboardAdmin />
 						</Route>
-
+						<Route path="/adminprofil" exact>
+							<ProfilAdmin />
+						</Route>
 
 						{/* ///// */}
 						<Route path="/signin" exact>

@@ -1,4 +1,3 @@
-// UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Storage } from '@ionic/storage';
 import axios from 'axios';

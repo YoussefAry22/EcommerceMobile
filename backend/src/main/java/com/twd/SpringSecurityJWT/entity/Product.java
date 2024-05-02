@@ -1,152 +1,156 @@
-package com.twd.SpringSecurityJWT.entity;
+    package com.twd.SpringSecurityJWT.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.Data;
+    import com.fasterxml.jackson.annotation.JsonBackReference;
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import jakarta.persistence.*;
+    import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+    import java.time.LocalDateTime;
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Objects;
 
-@Data
-@Entity
-@Table(name = "product")
-public class Product {
+    @Data
+    @Entity
+    @Table(name = "product")
+    public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long idProduct;
+        private Long idProduct;
 
-    private String nameProduct ;
+        private String name ;
+        private String name_link ;
+        private String price ;
+        private String image;
 
-    private Long categoryProduct;
+        private String nameProduct   ;
+        private Long categoryProduct;
 
-    private String decriptionProduct;
+        private String decriptionProduct;
 
-    private Double priceProduct ;
+        private Double priceProduct ;
 
-    private Long stockProduct ;
+        private Long stockProduct ;
 
-    private LocalDateTime creationDate;
+        private LocalDateTime creationDate;
 
-    //
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "user_id",nullable = false)
-    private OurUsers user;
+        //
+        @ManyToOne
+        @JsonBackReference
+        @JoinColumn(name = "user_id",nullable = false)
+        private OurUsers user;
 
-    @OneToMany(mappedBy = "product")
-    private List<SavedProduct> savedProducts = new ArrayList<>();
+        @OneToMany(mappedBy = "product")
+        private List<SavedProduct> savedProducts = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private List<CartProduct> cartProducts = new ArrayList<>();
-    //////
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-    /////////
+        @JsonIgnore
+        @OneToMany(mappedBy = "product")
+        private List<CartProduct> cartProducts = new ArrayList<>();
+        //////
+        @ManyToOne
+        @JoinColumn(name = "category_id")
+        private Category category;
+        /////////
 
-    public void setCreationdate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+        public void setCreationdate(LocalDateTime creationDate) {
+            this.creationDate = creationDate;
+        }
+
+
+
+
+        public OurUsers getUser() {
+            return user;
+        }
+
+        public void setUser(OurUsers user) {
+            this.user = user;
+        }
+
+        public List<CartProduct> getLikedByUsers() {
+            return cartProducts;
+        }
+
+        //////////
+
+
+        public Long getIdProduct() {
+            return idProduct;
+        }
+
+        public void setIdProduct(Long idProduct) {
+            this.idProduct = idProduct;
+        }
+
+        public String getNameProduct() {
+            return nameProduct;
+        }
+
+        public void setNameProduct(String nameProduct) {
+            this.nameProduct = nameProduct;
+        }
+
+        public String getDecriptionProduct() {
+            return decriptionProduct;
+        }
+
+        public void setDecriptionProduct(String decriptionProduct) {
+            this.decriptionProduct = decriptionProduct;
+        }
+
+        public Double getPriceProduct() {
+            return priceProduct;
+        }
+
+        public void setPriceProduct(Double priceProduct) {
+            this.priceProduct = priceProduct;
+        }
+
+        public Long getStockProduct() {
+            return stockProduct;
+        }
+
+        public void setStockProduct(Long stockProduct) {
+            this.stockProduct = stockProduct;
+        }
+
+        public LocalDateTime getCreationDate() {
+            return creationDate;
+        }
+
+        public void setCreationDate(LocalDateTime creationDate) {
+            this.creationDate = creationDate;
+        }
+
+        public List<SavedProduct> getSavedProducts() {
+            return savedProducts;
+        }
+
+        public void setSavedProducts(List<SavedProduct> savedProducts) {
+            this.savedProducts = savedProducts;
+        }
+
+        public List<CartProduct> getCartProducts() {
+            return cartProducts;
+        }
+
+        public void setCartProducts(List<CartProduct> cartProducts) {
+            this.cartProducts = cartProducts;
+        }
+
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Product product = (Product) o;
+            return Objects.equals(idProduct, product.idProduct) && Objects.equals(nameProduct, product.nameProduct) && Objects.equals(decriptionProduct, product.decriptionProduct) && Objects.equals(priceProduct, product.priceProduct) && Objects.equals(user, product.user);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(idProduct, nameProduct, decriptionProduct, priceProduct, user);
+        }
     }
-
-
-
-
-    public OurUsers getUser() {
-        return user;
-    }
-
-    public void setUser(OurUsers user) {
-        this.user = user;
-    }
-
-    public List<CartProduct> getLikedByUsers() {
-        return cartProducts;
-    }
-
-    //////////
-
-
-    public Long getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
-
-    public String getDecriptionProduct() {
-        return decriptionProduct;
-    }
-
-    public void setDecriptionProduct(String decriptionProduct) {
-        this.decriptionProduct = decriptionProduct;
-    }
-
-    public Double getPriceProduct() {
-        return priceProduct;
-    }
-
-    public void setPriceProduct(Double priceProduct) {
-        this.priceProduct = priceProduct;
-    }
-
-    public Long getStockProduct() {
-        return stockProduct;
-    }
-
-    public void setStockProduct(Long stockProduct) {
-        this.stockProduct = stockProduct;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public List<SavedProduct> getSavedProducts() {
-        return savedProducts;
-    }
-
-    public void setSavedProducts(List<SavedProduct> savedProducts) {
-        this.savedProducts = savedProducts;
-    }
-
-    public List<CartProduct> getCartProducts() {
-        return cartProducts;
-    }
-
-    public void setCartProducts(List<CartProduct> cartProducts) {
-        this.cartProducts = cartProducts;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(idProduct, product.idProduct) && Objects.equals(nameProduct, product.nameProduct) && Objects.equals(decriptionProduct, product.decriptionProduct) && Objects.equals(priceProduct, product.priceProduct) && Objects.equals(user, product.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idProduct, nameProduct, decriptionProduct, priceProduct, user);
-    }
-}

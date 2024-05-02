@@ -2,7 +2,7 @@ import { ProductStore } from "./ProductStore";
 
 export const fetchData = async () => {
 
-    const json = ["beds.json", "armchairs.json", "coffee_tables.json", "cushions.json", "floor_lamps.json", "office_chairs.json"];
+    const json = ["beds.json", "armchairs.json", "coffee_tables.json", "cushions.json", "floor_lamps.json", "office_chairs.json"];//list categorie
 
     var products = [];
 
@@ -30,7 +30,7 @@ export const fetchData = async () => {
 
 const fetchProducts = async category => {
 
-    const response = await fetch(`products/${ category }`);
+    const response = await fetch(`products/${ category }`);//api fetch product by categorie
     const data = await response.json();
 
     //  Set a product id

@@ -28,6 +28,7 @@ public class ReqRes {
     private OurUsers ourUsers;
     private String firstname;
     private String lastname;
+    private Long number;
 
     /////
     private String nameProduct;

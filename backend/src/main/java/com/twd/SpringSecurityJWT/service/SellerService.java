@@ -31,13 +31,13 @@ public class SellerService {
                 resp.setMessage("Email already exists");
                 return resp;
             }
-
             OurUsers ourUsers = new OurUsers();
             ourUsers.setEmail(registrationRequest.getEmail());
             ourUsers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             ourUsers.setRole("SELLER");
             ourUsers.setFirstname(registrationRequest.getFirstname());
             ourUsers.setLastname(registrationRequest.getLastname());
+            ourUsers.setNumber(registrationRequest.getNumber());
             OurUsers ourUserResult = ourUserRepo.save(ourUsers);
             if (ourUserResult != null && ourUserResult.getId() > 0) {
                 resp.setOurUsers(ourUserResult);

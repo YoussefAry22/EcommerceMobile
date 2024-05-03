@@ -10,6 +10,9 @@ import { useAdmin } from "../context/authAdminContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Storage } from "@ionic/storage/dist/esm";
 
+import { chevronBack } from 'ionicons/icons';
+
+
 const ProfilAdmin = () => {
   const products = ProductStore.useState((s) => s.products);
   const favourites = FavouritesStore.useState((s) => s.product_ids);
@@ -68,15 +71,11 @@ const ProfilAdmin = () => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonButton
-                color="dark"
-                text="Home"
-                routerLink="/dashboard"
-                routerDirection="back"
-              >
-                <IonIcon color="dark" />
-                &nbsp;Dashboard
+              <IonButton color="dark" routerLink="/dashboard" routerDirection="back">
+                <IonIcon color="dark" icon={chevronBack} />
+                &nbsp; <b>Dashboard</b>
               </IonButton>
+
             </IonButtons>
             <IonButtons slot="end">
               <IonBadge color="danger">{favourites.length}</IonBadge>

@@ -30,7 +30,7 @@ public class OurUsers implements UserDetails {
     private Long age;
     private Long number ;
     private String birthDate;
-    private String image;
+//    private String image;
 
 
     ///////
@@ -46,12 +46,20 @@ public class OurUsers implements UserDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<CartProduct> likedCartProducts = new ArrayList<>();
+    /////
+    // Define relationship with ImageOurUsers entity
+    @OneToOne(mappedBy = "ourUsers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ImageOurUsers image;
+    //////
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role));
     }
 
-
+/////////
     @Override
     public String getUsername() {
         return email;

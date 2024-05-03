@@ -39,7 +39,7 @@ public class SellerController {
     }
 
     @GetMapping("/sellers")
-    @Secured("ADMIN")
+//  @Secured("ADMIN")
     public ResponseEntity<List<OurUsers>> getSellers() {
         List<OurUsers> sellers = sellerService.getAllSellers();
         return ResponseEntity.ok(sellers);

@@ -35,7 +35,8 @@ import Profile from './pages/Profile';
 import SignInAdmin from './pages/SignInAdmin';
 import DashboardAdmin from './pages/DashboardAdmin';
 import ProfilAdmin from './pages/ProfilAdmin';
-
+import Seller from './pages/Seller';
+import AddSeller from './pages/AddSeller';
 
 setupIonicReact({});
 
@@ -84,7 +85,12 @@ const App = () => {
 						<Route path="/adminprofil" exact>
 							<ProfilAdmin />
 						</Route>
-
+						<Route path="/seller/:id" exact>
+							<Seller />
+						</Route>
+						<Route path="/addseller" exact>
+							<AddSeller />
+						</Route>
 						{/* ///// */}
 						<Route path="/signin" exact>
 							<SignIn />

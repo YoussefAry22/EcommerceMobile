@@ -58,26 +58,25 @@ const Seller = () => {
                 {seller && (
                     <IonGrid>
                         <IonRow>
-                        <IonCol size="12">
-                            <IonCard className={styles.categoryCard}>
-                                <IonCardHeader className={styles.productCardHeader}>
-            
-                                    <img src={seller.image} alt="product pic" />
-                                    <p className="ion-text-wrap">{seller.firstname} {seller.lastname}</p>
-                                    
-                                </IonCardHeader>
-                                <IonCardContent className={styles.categoryCardContent}>
-                                        <div className={styles.productPrice}>
-                                            <IonButton size="large" color="dark" >
-                                                <IonIcon icon={cartOutline} />&nbsp;&nbsp;Update Seller
-                                                <IonIcon icon={cartOutline} />&nbsp;&nbsp;Delete Seller
+                            <IonCol size="12">
+                                <IonCard className={styles.categoryCard}>
+                                    <IonCardHeader className={styles.productCardHeader}>
 
-                                            </IonButton>
+                                        <img src={seller.image} alt="product pic" />
+                                        <p className="ion-text-wrap">{seller.firstname} {seller.lastname}</p>
+
+                                    </IonCardHeader>
+                                    <IonCardContent className={styles.categoryCardContent}>
+                                        <div className={styles.productPrice}>
+                                                <IonRow style={{ justifyContent: 'space-between', marginTop: "2em" }}>
+                                                    <IonButton size="large" color="danger" style={{marginRight: '2.5em', width: '9em' }} routerLink="/updateseller" routerDirection="back" >DELETE Seller</IonButton>
+                                                    <IonButton size="large" color="success" style={{ width: '9em' }} >UPDATE Seller</IonButton>
+                                                </IonRow>
                                         </div>
                                     </IonCardContent>
-                            </IonCard>
-                        </IonCol>
-                    </IonRow>
+                                </IonCard>
+                            </IonCol>
+                        </IonRow>
                     </IonGrid>
                 )}
             </IonContent>

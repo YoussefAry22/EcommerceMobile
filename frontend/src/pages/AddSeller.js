@@ -1,6 +1,9 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 import {
+    IonRow,
     IonPage,
     IonContent,
     IonInput,
@@ -28,6 +31,7 @@ function AddSeller() {
         password: ''
     });
     const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -41,14 +45,19 @@ function AddSeller() {
         await storageInstance.create();
         setStorage(storageInstance);
     };
-    
+
     useEffect(() => {
         initializeStorage();
     }, []);
-    
 
+    const history = useHistory(); // Import and initialize useHistory
     const handleSubmit = async () => {
         try {
+            if (!formData.firstname || !formData.lastname || !formData.number || !formData.email || !formData.password) {
+                setError("Please fill out all required fields.")
+                throw new Error('Please fill out all required fields.');
+            }
+
             const token = await storage.get("token");
             if (!token) throw new Error('Token not found');
             const response = await axios.post('http://localhost:8080/admin/addSeller', formData, {
@@ -56,10 +65,18 @@ function AddSeller() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(response.data); // Handle success response here
+            console.log(response.data);
+            console.log("Seller added successfully!");
+
+            setSuccessMessage('Seller added successfully!'); // Display success message
+
+            // Redirect to /dashboard route after 2 seconds
+            setTimeout(() => {
+                history.push('/dashboard');
+            }, 1500);
         } catch (error) {
-            console.error('Error adding seller:', error);
-            setError('Error adding seller. Please try again later.');
+            console.error(error);
+            setError("Please fill out all fields correctly.");
         }
     };
 
@@ -79,10 +96,10 @@ function AddSeller() {
                 <IonGrid className="signin-container" style={{ marginTop: '5em' }}>
                     <IonList>
                         <IonItem>
-                            <IonInput name="firstname" value={formData.firstname} onIonChange={handleInputChange} label="Text input" placeholder="Firstname" required></IonInput>
+                            <IonInput name="firstname" value={formData.firstname} onIonChange={handleInputChange} label="Text input" placeholder="Seller's firstname" required></IonInput>
                         </IonItem>
                         <IonItem>
-                            <IonInput name="lastname" value={formData.lastname} onIonChange={handleInputChange} label="Text input" placeholder="Lastname" required></IonInput>
+                            <IonInput name="lastname" value={formData.lastname} onIonChange={handleInputChange} label="Text input" placeholder="Seller's lastname" required></IonInput>
                         </IonItem>
                         <IonItem>
                             <IonInput name="number" value={formData.number} onIonChange={handleInputChange} label="Telephone input" type="number" placeholder="12345678" required></IonInput>
@@ -95,13 +112,26 @@ function AddSeller() {
                         </IonItem>
                     </IonList>
                 </IonGrid>
-                <IonButton style={{ display: 'flex', justifyContent: 'center', width: '7em' }} onClick={handleSubmit}>Add seller</IonButton>
+                <IonRow style={{ justifyContent: 'space-between', marginTop: "1.5em" }}>
+                    <IonButton color="danger" style={{ width: '7em' }} routerLink="/dashboard" routerDirection="back" >Cancel</IonButton>
+                    <IonButton color="primary" style={{ width: '7em' }} onClick={handleSubmit}>Add seller</IonButton>
+                </IonRow>
+
+
+
                 <IonToast
                     isOpen={!!error}
                     message={error}
                     duration={5000}
                     onDidDismiss={() => setError(null)}
                 />
+                <IonToast
+                    isOpen={!!successMessage}
+                    message={successMessage}
+                    duration={5000}
+                    onDidDismiss={() => setSuccessMessage('')}
+                />
+
             </IonContent>
         </IonPage>
     );

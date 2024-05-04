@@ -75,17 +75,6 @@ const ProfilAdmin = () => {
                 <IonIcon color="dark" icon={chevronBack} />
                 &nbsp; <b>Dashboard</b>
               </IonButton>
-
-            </IonButtons>
-            <IonButtons slot="end">
-              <IonBadge color="danger">{favourites.length}</IonBadge>
-              <IonButton color="danger" routerLink="/favourites">
-                <IonIcon icon={heart} />
-              </IonButton>
-              <IonBadge color="dark">{shopCart.length}</IonBadge>
-              <IonButton color="dark" routerLink="/cart">
-                <IonIcon icon={cart} />
-              </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
@@ -93,7 +82,7 @@ const ProfilAdmin = () => {
         <IonContent fullscreen>
           <IonHeader collapse="condense">
             <IonToolbar>
-              <IonTitle size="large">Categories</IonTitle>
+            <IonTitle size="large">Profile</IonTitle>
             </IonToolbar>
           </IonHeader>
 

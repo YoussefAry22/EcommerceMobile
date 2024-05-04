@@ -107,4 +107,52 @@ public class AuthService {
         }
         return response;
     }
+
+    ///////
+    public ReqRes signUpSeller(ReqRes registrationRequest){
+        ReqRes resp = new ReqRes();
+        try {
+            OurUsers ourUsers = new OurUsers();
+            ourUsers.setLastname(registrationRequest.getLastname());
+            ourUsers.setFirstname(registrationRequest.getFirstname());
+            ourUsers.setEmail(registrationRequest.getEmail());
+            ourUsers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
+            ourUsers.setRole("SELLER");
+            OurUsers ourUserResult = ourUserRepo.save(ourUsers);
+            if (ourUserResult != null && ourUserResult.getId()>0) {
+                resp.setOurUsers(ourUserResult);
+                resp.setMessage("Seller Saved Successfully");
+                resp.setStatusCode(200);
+            }
+        }catch (Exception e){
+            resp.setStatusCode(500);
+            resp.setError(e.getMessage());
+        }
+        return resp;
+    }
+    public ReqRes signInAsSeller(ReqRes signinRequest){
+        ReqRes response = new ReqRes();
+
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getEmail(),signinRequest.getPassword()));
+            var user = ourUserRepo.findByEmail(signinRequest.getEmail()).orElseThrow();
+            if (!user.getRole().equals("SELLER")) {
+                response.setStatusCode(403); // Forbidden
+                response.setMessage("Only Sellers are allowed !");
+                return response;
+            }
+            System.out.println("Seller IS: "+ user);
+            var jwt = jwtUtils.generateToken(user);
+            var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
+            response.setStatusCode(200);
+            response.setToken(jwt);
+            response.setRefreshToken(refreshToken);
+            response.setExpirationTime("24Hr");
+            response.setMessage("Successfully Signed In as SELLER");
+        }catch (Exception e){
+            response.setStatusCode(500);
+            response.setError(e.getMessage());
+        }
+        return response;
+    }
 }

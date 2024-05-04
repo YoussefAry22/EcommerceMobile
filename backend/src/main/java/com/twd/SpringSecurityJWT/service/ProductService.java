@@ -8,8 +8,10 @@ import com.twd.SpringSecurityJWT.repository.CategoryRepo;
 import com.twd.SpringSecurityJWT.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,6 +51,11 @@ public class ProductService {
             return true; // Deletion successful
         }
         return false; // Product not found, deletion failed
+    }
+
+    @Transactional(readOnly = true)
+    public List<Product> getUserProducts(Long userId) {
+        return productRepository.findByUserId(userId);
     }
 
 }

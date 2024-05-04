@@ -33,4 +33,13 @@ public class AuthController {
     public ResponseEntity<ReqRes> signInAsAdmin(@RequestBody ReqRes signInRequest){
         return ResponseEntity.ok(authService.signInAsAdmin(signInRequest));
     }
+
+    @PostMapping("/signupseller")
+    public ResponseEntity<ReqRes> signUpSeller(@RequestBody ReqRes signUpRequest){
+        return ResponseEntity.ok(authService.signUpSeller(signUpRequest));
+    }
+    @PostMapping("/signinseller")
+    public ResponseEntity<ReqRes> signInAsSeller(@RequestBody ReqRes signInRequest){
+        return ResponseEntity.ok(authService.signInAsSeller(signInRequest));
+    }
 }

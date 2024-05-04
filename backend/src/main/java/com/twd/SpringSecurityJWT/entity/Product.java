@@ -20,18 +20,11 @@
 
         private Long idProduct;
 
-        private String name ;
+        private String nameProduct ;
         private String name_link ;
-        private String price ;
         private String image;
-
-        private String nameProduct   ;
-        private Long categoryProduct;
-
         private String decriptionProduct;
-
         private Double priceProduct ;
-
         private Long stockProduct ;
 
         private LocalDateTime creationDate;

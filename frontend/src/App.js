@@ -37,6 +37,13 @@ import DashboardAdmin from './pages/DashboardAdmin';
 import ProfilAdmin from './pages/ProfilAdmin';
 import Seller from './pages/Seller';
 import AddSeller from './pages/AddSeller';
+import SignInSeller from './pages/seller/SignInSeller';
+import SignUpSeller from './pages/seller/SignUpSeller';
+import StoreSeller from './pages/seller/StoreSeller';
+import AddProduct from './pages/seller/AddProduct';
+import ProductDetail from './pages/seller/ProductDetail';
+import SellerProfile from './pages/seller/SellerProfile';
+
 
 setupIonicReact({});
 
@@ -91,6 +98,28 @@ const App = () => {
 						<Route path="/addseller" exact>
 							<AddSeller />
 						</Route>
+
+
+						{/* Seller Routage */}
+						<Route path="/signupasseller" exact>
+							<SignUpSeller />
+						</Route>
+						<Route path="/signinasseller" exact>
+							<SignInSeller />
+						</Route>
+						<Route path="/sellerprofile" exact>
+							<SellerProfile />
+						</Route>
+						<Route path="/store" exact>
+							<StoreSeller/>
+						</Route>
+						<Route path='/addproduct' exact>
+							<AddProduct/>
+						</Route>
+						<Route path='/product/:id' exact>
+							<ProductDetail/>
+						</Route>
+
 						{/* ///// */}
 						<Route path="/signin" exact>
 							<SignIn />

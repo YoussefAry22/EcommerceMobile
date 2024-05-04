@@ -1,4 +1,3 @@
-// UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Storage } from '@ionic/storage';
 import axios from 'axios';
@@ -100,24 +99,24 @@ export const UserProvider = ({ children }) => {
 
 
   const history = useHistory();
-  useEffect(() => {
-    const fetchData = async () => {
-        const storage = new Storage();
-        await storage.create();
-      try {
-        const accessToken = await storage.get("token");
-        if (!accessToken) {
-         // history.push("/signIn");
-        } else {
-          await checkAuthUser();
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //       const storage = new Storage();
+  //       await storage.create();
+  //     try {
+  //       const accessToken = await storage.get("token");
+  //       if (!accessToken) {
+  //        // history.push("/signIn");
+  //       } else {
+  //         await checkAuthUser();
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [storage, history]); // Include storage and history in the dependency array
+  //   fetchData();
+  // }, [storage, history]); // Include storage and history in the dependency array
 
   return (
     <UserContext.Provider value={{ user, setUser, isAuthenticated, isLoading, checkAuthUser ,clearStorage}}>

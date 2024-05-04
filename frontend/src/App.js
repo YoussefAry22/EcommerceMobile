@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { setupIonicReact } from '@ionic/react';
@@ -32,6 +32,11 @@ import SignIn from './pages/SignIn';
 import SignUpPage from './pages/SignUp';
 import SignInPage from './pages/SignIn';
 import Profile from './pages/Profile';
+import SignInAdmin from './pages/SignInAdmin';
+import DashboardAdmin from './pages/DashboardAdmin';
+import ProfilAdmin from './pages/ProfilAdmin';
+import Seller from './pages/Seller';
+import AddSeller from './pages/AddSeller';
 
 setupIonicReact({});
 
@@ -46,38 +51,57 @@ const App = () => {
 		<IonApp>
 			<IonReactRouter>
 				<IonRouterOutlet>
-					<Route path="/" exact={true}>
-						<Redirect to="/home" />
-					</Route>
-					<Route path="/home" exact={true}>
-						<Home />
-					</Route>
+					<Switch>
+						<Route path="/" exact={true}>
+							<Redirect to="/home" />
+						</Route>
+						<Route path="/home" exact={true}>
+							<Home />
+						</Route>
 
-					<Route path="/favourites" exact>
-						<FavouriteProducts />
-					</Route>
+						<Route path="/favourites" exact>
+							<FavouriteProducts />
+						</Route>
 
-					<Route path="/cart" exact>
-						<CartProducts />
-					</Route>
+						<Route path="/cart" exact>
+							<CartProducts />
+						</Route>
 
-					<Route path="/category/:slug" exact>
-						<CategoryProducts />
-					</Route>
+						<Route path="/category/:slug" exact>
+							<CategoryProducts />
+						</Route>
 
-					<Route path="/category/:slug/:id" exact>
-						<Product />
-					</Route>
+						<Route path="/category/:slug/:id" exact>
+							<Product />
+						</Route>
 
-					<Route path="/signin" exact>
-						<SignIn/>
-					</Route>
-					<Route path="/signup" exact>
-						<SignUpPage />
-					</Route>
-					<Route path="/profile" exact>
-                <Profile />
-              </Route>
+						{/* Admin Routage */}
+						<Route path="/signinasadmin" exact>
+							<SignInAdmin />
+						</Route>
+						<Route path="/dashboard" exact>
+							<DashboardAdmin />
+						</Route>
+						<Route path="/adminprofil" exact>
+							<ProfilAdmin />
+						</Route>
+						<Route path="/seller/:id" exact>
+							<Seller />
+						</Route>
+						<Route path="/addseller" exact>
+							<AddSeller />
+						</Route>
+						{/* ///// */}
+						<Route path="/signin" exact>
+							<SignIn />
+						</Route>
+						<Route path="/signup" exact>
+							<SignUpPage />
+						</Route>
+						<Route path="/profile" exact>
+							<Profile />
+						</Route>
+					</Switch>
 				</IonRouterOutlet>
 			</IonReactRouter>
 		</IonApp>

@@ -46,9 +46,10 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "4.1.0",
-    "@ionic/cli": "6.20.1",
-    "react-scripts": "5.0.1"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@capacitor/cli": "^4.8.2",
+    "@ionic/cli": "^7.2.0",
+    "react-scripts": "^5.0.1"
   },
   "description": "An Ionic project"
 }

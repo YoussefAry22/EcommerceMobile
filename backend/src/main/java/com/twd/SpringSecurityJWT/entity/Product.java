@@ -24,6 +24,7 @@
         private String name_link ;
         private String image;
         private String decriptionProduct;
+        private String price ;
         private Double priceProduct ;
         private Long stockProduct ;
 

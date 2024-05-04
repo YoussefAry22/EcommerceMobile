@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3efff52b-a41e-4617-b1cf-e3b0e8898bea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/twd/SpringSecurityJWT/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/twd/SpringSecurityJWT/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/SpringSecurityJwtApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/SpringSecurityJwtApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/CorsConfig$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/CorsConfig$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/CorsConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/JWTAuthFIlter.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/JWTAuthFIlter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/AdminUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/AdminUsers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/OurUsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/OurUsersController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/SellerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/controller/SellerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/dto/ReqRes.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/dto/ReqRes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/CartProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/CartProduct.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/OurUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/OurUsers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/SavedProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/entity/SavedProduct.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/repository/CategoryRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/repository/CategoryRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/repository/OurUserRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/repository/OurUserRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/repository/ProductRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/repository/ProductRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/CartProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/CartProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/JWTUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/JWTUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/OurUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/OurUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/OurUsersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/OurUsersService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/SavedproductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/SavedproductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/SellerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/twd/SpringSecurityJWT/service/SellerService.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2fxWxkJ8OdeZ9spXXJBvgb8obQg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3efff52b-a41e-4617-b1cf-e3b0e8898bea" name="Changes" comment="" />
+      <created>1714743472046</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714743472046</updated>
+      <workItem from="1714743483284" duration="70000" />
+    </task>
+    <servers />
+  </component>
+</project>

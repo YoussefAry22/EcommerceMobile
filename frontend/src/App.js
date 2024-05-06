@@ -43,6 +43,7 @@ import StoreSeller from './pages/seller/StoreSeller';
 import AddProduct from './pages/seller/AddProduct';
 import ProductDetail from './pages/seller/ProductDetail';
 import SellerProfile from './pages/seller/SellerProfile';
+import UpdatePhoto from './pages/updatephoto';
 
 
 setupIonicReact({});
@@ -73,6 +74,9 @@ const App = () => {
 						<Route path="/cart" exact>
 							<CartProducts />
 						</Route>
+
+						<Route path="/updatephoto/:id" exact component={UpdatePhoto} />
+
 
 						<Route path="/category/:slug" exact>
 							<CategoryProducts />

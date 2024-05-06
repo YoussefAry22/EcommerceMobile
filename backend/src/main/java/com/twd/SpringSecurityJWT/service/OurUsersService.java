@@ -7,12 +7,22 @@ import com.twd.SpringSecurityJWT.repository.OurUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 @Service
-public class OurUsersService {
+    public class OurUsersService {
 
     @Autowired
     private OurUserRepo ourUserRepo ;
+
+    private static final String UPLOAD_DIR = "C:\\Users\\dell\\Desktop\\EcommerceMobile\\backend\\profileimage";
+
 
     public ReqRes getAdminProfile(UserDetails userDetails) {
         ReqRes response = new ReqRes();
@@ -38,7 +48,29 @@ public class OurUsersService {
         }
         return response;
     }
+    public OurUsers getUserById(Long id) {
+        Optional<OurUsers> userOptional = ourUserRepo.findById(id);
+        return userOptional.orElse(null); // Or handle the case where user is not found
+    }
+    public void userUpdate(OurUsers user) {
+        // Save the user to the database using repository methods
+        ourUserRepo.save(user);
+    }
 
+    public String saveImage(MultipartFile file) throws IOException {
+        // Ensure the upload directory exists
+        Path uploadPath = Paths.get(UPLOAD_DIR);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        // Save the file to the upload directory
+        String filename = file.getOriginalFilename();
+        Path filePath = Paths.get(UPLOAD_DIR, filename);
+        Files.write(filePath, file.getBytes());
+
+        return UPLOAD_DIR+"/"+filename;
+    }
 
     public ReqRes getSellerProfile(UserDetails userDetails) {
         ReqRes response = new ReqRes();

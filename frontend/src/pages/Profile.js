@@ -22,25 +22,26 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { cart, cartOutline, chevronBackOutline, heart } from "ionicons/icons";
+import { cart, cartOutline, chevronBackOutline, heart, cameraOutline } from "ionicons/icons";
 import { ProductStore } from "../data/ProductStore";
 import { FavouritesStore } from "../data/FavouritesStore";
 import { CartStore } from "../data/CartStore";
 import { useUser } from "../context/authContext";
 import { Storage } from "@ionic/storage";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 
 const Profile = () => {
   const products = ProductStore.useState((s) => s.products);
   const favourites = FavouritesStore.useState((s) => s.product_ids);
   const shopCart = CartStore.useState((s) => s.product_ids);
-  const {  clearStorage } = useUser();
+  const { clearStorage } = useUser();
   const [storage, setStorage] = useState(null);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
   const [auth, setAuth] = useState(true);
-
+  const [userPhoto, setUserPhoto] = useState(null);
 
   useEffect(() => {
     const initializeStorage = async () => {
@@ -52,133 +53,140 @@ const Profile = () => {
       setUserData(() => data);
       setLoading(false);
       console.log(userData);
-    
     };
 
     initializeStorage();
   }, [loading]);
 
+
+
+
+  useEffect(() => {
+    const fetchUserPhoto = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/user/image/${userData.id}`, {
+          responseType: 'arraybuffer', // Specify response type as arraybuffer
+        });
+        // Convert the arraybuffer to base64 string
+        const base64String = btoa(
+          new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), ''),
+        );
+        setUserPhoto(`data:image/jpeg;base64,${base64String}`);
+      } catch (error) {
+        console.error('Error fetching user photo:', error);
+      }
+    };
+
+    fetchUserPhoto();
+  }, [loading]);
+ 
+
   useEffect(() => {
     const initializeStorage = async () => {
-        const storage = new Storage();
-        await storage.create();
-        setStorage(storage);
-        const token = await storage.get("token");
-        console.log(token)
-        if(token){
-            setAuth((e)=>true);
-
-        }
-        console.log(auth)
-        
+      const storage = new Storage();
+      await storage.create();
+      setStorage(storage);
+      const token = await storage.get("token");
+      console.log(token);
+      if (token) {
+        setAuth((e) => true);
+      }
+      console.log(auth);
     };
 
     initializeStorage();
-}, [auth]);
+  }, [auth]);
 
-
-
- const logout =()=>{
+  const logout = () => {
     window.location.href = "/signIn";
     clearStorage();
+  };
 
+  const navigateToUpdatePhoto = () => {
+    history.push(`/updatephoto/${userData.id}`);
+  };
 
-
-  }
-  if(auth){
-  return (
-    <IonPage id="home-page">
+  if (auth) {
+    return (
+      <IonPage id="home-page">
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonButton
-              color="dark"
-              text="Home"
-              routerLink="/"
-              routerDirection="back"
-            >
-              <IonIcon color="dark" />
-              &nbsp;Home
-            </IonButton>
-          </IonButtons>
-          <IonButtons slot="end">
-            <IonBadge color="danger">{favourites.length}</IonBadge>
-            <IonButton color="danger" routerLink="/favourites">
-              <IonIcon icon={heart} />
-            </IonButton>
-            <IonBadge color="dark">{shopCart.length}</IonBadge>
-            <IonButton color="dark" routerLink="/cart">
-              <IonIcon icon={cart} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <IonToolbar>
+            <IonButtons slot="start">
+              <IonButton
+                color="dark"
+                text="Home"
+                routerLink="/"
+                routerDirection="back"
+              >
+                <IonIcon color="dark" />
+                &nbsp;Home
+              </IonButton>
+            </IonButtons>
+            <IonButtons slot="end">
+              <IonBadge color="danger">{favourites.length}</IonBadge>
+              <IonButton color="danger" routerLink="/favourites">
+                <IonIcon icon={heart} />
+              </IonButton>
+              <IonBadge color="dark">{shopCart.length}</IonBadge>
+              <IonButton color="dark" routerLink="/cart">
+                <IonIcon icon={cart} />
+              </IonButton>
+            </IonButtons>
+          </IonToolbar>      </IonHeader>
 
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Categories</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <IonGrid>
+          <IonRow className="ion-align-items-center">
+            <IonCol size="12" className="ion-text-center">
+              <IonImg src={userPhoto} />
+            </IonCol>
+          </IonRow>
 
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <IonGrid>
-            <IonPage>
-              <IonHeader>
-                <IonToolbar>
-                  <IonTitle>Profile</IonTitle>
-                </IonToolbar>
-              </IonHeader>
-              <IonContent fullscreen>
-                {" "}
-                <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                <div style={{ textAlign: "center", marginTop: "2rem" }}>
-                  <h2></h2>
+          <IonRow className="ion-align-items-center ion-justify-content-center">
+            <IonCol size="auto">
+              <IonCard>
+                <IonCardContent>
                   {userData && (
                     <div>
                       <IonLabel>First Name:</IonLabel>
                       <IonItem>
-                        <IonLabel style={{ textAlign: "center" }}>
-                          {userData.firstname}
-                        </IonLabel>
+                        <IonLabel>{userData.firstname}</IonLabel>
                       </IonItem>
-                      <IonLabel style={{ textAlign: "center" }}>
-                        Last Name:
-                      </IonLabel>
+                      <IonLabel>Last Name:</IonLabel>
                       <IonItem>
-                        <IonLabel style={{ textAlign: "center" }}>
-                          {userData.lastname}
-                        </IonLabel>
+                        <IonLabel>{userData.lastname}</IonLabel>
                       </IonItem>
-                      <IonLabel style={{ textAlign: "center" }}>
-                        Email:{" "}
-                      </IonLabel>
+                      <IonLabel>Email:</IonLabel>
                       <IonItem>
-                        <IonLabel style={{ textAlign: "center" }}>
-                          {userData.email}
-                        </IonLabel>
+                        <IonLabel>{userData.email}</IonLabel>
                       </IonItem>
-                  
                     </div>
                   )}
-                </div>
-                
-              </IonContent>
-              <IonButton color="dark" onClick={()=> logout() } >
-                            Log Out
-                        </IonButton>
-            </IonPage>
-                    
-      
-          </IonGrid>
-          
-        )}
-        
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+          </IonRow>
+
+          <IonRow className="ion-align-items-center ion-justify-content-center">
+            <IonCol size="auto">
+              <IonButton color="primary" onClick={navigateToUpdatePhoto}>
+                <IonIcon icon={cameraOutline} slot="start" />
+                Update Photo
+              </IonButton>
+            </IonCol>
+            <IonCol size="auto">
+              <IonButton color="danger" onClick={logout}>
+                Log Out
+              </IonButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
-    </IonPage>
-  );}else{ history.push("/signIn");}
+    </IonPage>);
+  } else {
+    history.push("/signIn");
+    return null;
+  }
 };
 
 export default Profile;

@@ -6,6 +6,7 @@ import com.twd.SpringSecurityJWT.entity.OurUsers;
 import com.twd.SpringSecurityJWT.service.OurUsersService;
 import com.twd.SpringSecurityJWT.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -42,12 +43,20 @@ public class SellerController {
         return ResponseEntity.ok(sellerService.createSeller(addSellerRequest));
     }
 
-    @GetMapping("/admin/sellers")
+    @GetMapping("/admin/sellersactive")
 //  @Secured("ADMIN")
-    public ResponseEntity<List<OurUsers>> getSellers() {
-        List<OurUsers> sellers = sellerService.getAllSellers();
+    public ResponseEntity<List<OurUsers>> getSellersActive() {
+        List<OurUsers> sellers = sellerService.getAllSellersActive();
         return ResponseEntity.ok(sellers);
     }
+
+    @GetMapping("/admin/sellerspending")
+//  @Secured("ADMIN")
+    public ResponseEntity<List<OurUsers>> getSellersPending() {
+        List<OurUsers> sellers = sellerService.getAllSellersPending();
+        return ResponseEntity.ok(sellers);
+    }
+
 
     @GetMapping("/admin/seller/{id}")
     @Secured("ADMIN")
@@ -83,4 +92,29 @@ public class SellerController {
         ReqRes response = ourUsersService.getSellerProfile(userDetails);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+
+    @PutMapping("/admin/seller/{sellerId}/activate")
+    public ResponseEntity<String> activateSellerAccount(@PathVariable Long sellerId) {
+        try {
+            // Activate the seller's account using the service method
+            sellerService.activateSellerAccount(sellerId);
+            return ResponseEntity.ok("Seller account activated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error activating seller account");
+        }
+    }
+
+    @PutMapping("/admin/seller/{sellerId}/reject")
+    public ResponseEntity<String> rejectSellerAccount(@PathVariable Long sellerId) {
+        try {
+            // Reject the seller's account using the service method
+            sellerService.rejectSellerAccount(sellerId);
+            return ResponseEntity.ok("Seller account rejected successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error rejecting seller account");
+        }
+    }
+
+
 }

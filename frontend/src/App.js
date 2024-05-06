@@ -43,6 +43,10 @@ import StoreSeller from './pages/seller/StoreSeller';
 import AddProduct from './pages/seller/AddProduct';
 import ProductDetail from './pages/seller/ProductDetail';
 import SellerProfile from './pages/seller/SellerProfile';
+import UpdateProduct from './pages/seller/UpdateProduct';
+import Camera from './pages/Camera';
+import Demands from './pages/admin/Demands';
+import UpdateSeller from './pages/admin/UpdateSeller';
 
 
 setupIonicReact({});
@@ -82,6 +86,7 @@ const App = () => {
 							<Product />
 						</Route>
 
+
 						{/* Admin Routage */}
 						<Route path="/signinasadmin" exact>
 							<SignInAdmin />
@@ -98,6 +103,13 @@ const App = () => {
 						<Route path="/addseller" exact>
 							<AddSeller />
 						</Route>
+						<Route path="/sellersdemands" exact>
+							<Demands />
+						</Route>
+						<Route path="/updateseller/:id" exact >
+							<UpdateSeller />
+						</Route>
+
 
 
 						{/* Seller Routage */}
@@ -118,6 +130,13 @@ const App = () => {
 						</Route>
 						<Route path='/product/:id' exact>
 							<ProductDetail/>
+						</Route>
+						<Route path='/updateproduct/:id' exact>
+							<UpdateProduct/>
+						</Route>
+
+						<Route path='/camera' exact>
+							<Camera/>
 						</Route>
 
 						{/* ///// */}

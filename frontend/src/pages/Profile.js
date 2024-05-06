@@ -79,8 +79,8 @@ const Profile = () => {
 
 
  const logout =()=>{
-    window.location.href = "/signIn";
     clearStorage();
+    history.push('/signIn');
 
 
 

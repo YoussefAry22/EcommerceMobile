@@ -4,6 +4,7 @@ import com.twd.SpringSecurityJWT.dto.ReqRes;
 import com.twd.SpringSecurityJWT.entity.OurUsers;
 import com.twd.SpringSecurityJWT.repository.OurUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -55,8 +56,12 @@ public class SellerService {
 
         return ourUserRepo.findByEmail(username);
     }
-    public List<OurUsers> getAllSellers() {
-        return ourUserRepo.findByRole("SELLER");
+    public List<OurUsers> getAllSellersActive() {
+        return ourUserRepo.findByRoleAndAccountState("SELLER", "ACTIVE");
+    }
+
+    public List<OurUsers> getAllSellersPending() {
+        return ourUserRepo.findByRoleAndAccountState("SELLER", "PENDING");
     }
 
     public Optional<OurUsers> getSellerById(Long id) {
@@ -95,4 +100,36 @@ public class SellerService {
         }
         return resp;
     }
+    public void activateSellerAccount(Long sellerId) {
+        try {
+            // Retrieve the seller from the database
+            OurUsers seller = ourUserRepo.findById(sellerId)
+                    .orElseThrow(() -> new Exception("Seller not found with id: " + sellerId));
+
+            // Update the account state to "ACTIVE"
+            seller.setAccountState("ACTIVE");
+            ourUserRepo.save(seller);
+            System.out.println("Seller Activated !");
+        } catch (Exception e) {
+            throw new RuntimeException("Error activating seller account", e);
+        }
+    }
+
+    public void rejectSellerAccount(Long sellerId) {
+        try {
+            // Retrieve the seller from the database
+            OurUsers seller = ourUserRepo.findById(sellerId)
+                    .orElseThrow(() -> new Exception("Seller not found with id: " + sellerId));
+
+            // Update the account state to "REJECTED"
+            seller.setAccountState("REJECTED");
+            ourUserRepo.save(seller);
+            System.out.println("Seller Rejected !");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error rejecting seller account", e);
+        }
+    }
+
+
 }

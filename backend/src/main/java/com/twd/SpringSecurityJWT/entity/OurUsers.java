@@ -30,7 +30,10 @@ public class OurUsers implements UserDetails {
     private Long age;
     private Long number ;
     private String birthDate;
+    private String accountState ;
 //    private String image;
+
+
 
 
     ///////

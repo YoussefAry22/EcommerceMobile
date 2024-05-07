@@ -6,6 +6,7 @@ import { FavouritesStore } from '../data/FavouritesStore';
 import { CartStore } from '../data/CartStore';
 import { useUser } from '../context/authContext';
 import { Storage } from '@ionic/storage';
+import axios from 'axios';
 
 const Home = () => {
     const products = ProductStore.useState(s => s.products);
@@ -16,6 +17,7 @@ const Home = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [auth, setAuth] = useState(true);
+    const [userPhoto, setUserPhoto] = useState(null);
 
     useEffect(() => {
         const initializeStorage = async () => {
@@ -37,6 +39,26 @@ const Home = () => {
         initializeStorage();
     }, [loading]);
 
+    useEffect(() => {
+        const fetchUserPhoto = async () => {
+          if (userData) {
+            try {
+              const response = await axios.get(`http://localhost:8080/user/image/${userData.id}`, {
+                responseType: 'arraybuffer',
+              });
+              const base64String = btoa(
+                new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), ''),
+              );
+              setUserPhoto(`data:image/jpeg;base64,${base64String}`);
+            } catch (error) {
+              console.error('Error fetching user photo:', error);
+            }
+          }
+        };
+    
+        fetchUserPhoto();
+      }, [loading, userData]);
+
     return (
         <IonPage id="home-page">
             <IonHeader>
@@ -45,7 +67,7 @@ const Home = () => {
                         {userData ? (
                             <IonRouterLink routerLink="/profile" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
                                 <IonAvatar aria-hidden="true">
-                                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                    <img alt="" src={userPhoto} />
                                 </IonAvatar>
                             </IonRouterLink>
                         ) : (

@@ -37,23 +37,27 @@ export const usePhotoGallery = () => {
         Preferences.set({ key: PHOTOS_PREF_KEY, value: JSON.stringify(photos) });
     }, [photos]);
 
-    const takePhoto = async () => {
-        try {
-            const photo = await Camera.getPhoto({
-                resultType: CameraResultType.Uri,
-                source: CameraSource.Camera,
-                quality: 100
-            });
+   const takePhoto = async () => {
+    try {
+        const photo = await Camera.getPhoto({
+            resultType: CameraResultType.Uri,
+            source: CameraSource.Camera,
+            quality: 100
+        });
 
-            const fileName = new Date().getTime() + '.jpeg';
-            const savedFileImage = await savePhoto(photo, fileName);
+        const fileName = new Date().getTime() + '.jpeg';
+        const savedFileImage = await savePhoto(photo, fileName);
 
-            const newPhotos = [...photos, savedFileImage];
-            setPhotos(newPhotos);
-        } catch (e) {
-            return;
-        }
-    };
+        const newPhotos = [...photos, savedFileImage];
+        setPhotos(newPhotos);
+
+        return newPhotos; // Return the new photos array after adding the captured photo
+    } catch (e) {
+        console.error("Error taking photo:", e);
+        throw e; // Rethrow the error to handle it in the component
+    }
+};
+
 
     const savePhoto = async (photo, fileName) => {
         let base64Data;

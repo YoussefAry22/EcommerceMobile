@@ -43,6 +43,7 @@ import StoreSeller from './pages/seller/StoreSeller';
 import AddProduct from './pages/seller/AddProduct';
 import ProductDetail from './pages/seller/ProductDetail';
 import SellerProfile from './pages/seller/SellerProfile';
+import UpdatePhoto from './pages/updatephoto';
 import UpdateProduct from './pages/seller/UpdateProduct';
 import Camera from './pages/Camera';
 import Demands from './pages/admin/Demands';
@@ -77,6 +78,9 @@ const App = () => {
 						<Route path="/cart" exact>
 							<CartProducts />
 						</Route>
+
+						<Route path="/updatephoto/:id" exact component={UpdatePhoto} />
+
 
 						<Route path="/category/:slug" exact>
 							<CategoryProducts />

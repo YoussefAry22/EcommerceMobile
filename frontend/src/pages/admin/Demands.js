@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
-    IonAvatar, IonNote, IonBadge, IonButton, IonButtons, useIonToast,
+    IonButton, IonButtons, useIonToast,
     IonLabel, IonSpinner, IonItem, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar
 } from '@ionic/react';
-import { addOutline, bagCheckOutline, closeCircleOutline, checkmarkCircleOutline, trashOutline, settingsSharp, chevronBack } from 'ionicons/icons';
+import {closeCircleOutline, checkmarkCircleOutline, chevronBack } from 'ionicons/icons';
 
 import axios from 'axios';
 import { useAdmin } from '../../context/authAdminContext';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import {
     IonRow,
@@ -8,7 +8,6 @@ import {
     IonContent,
     IonInput,
     IonButton,
-    IonAlert,
     IonGrid,
     IonList,
     IonItem,

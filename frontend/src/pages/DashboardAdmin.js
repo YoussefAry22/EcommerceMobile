@@ -3,7 +3,8 @@ import {
     IonAvatar, IonNote, IonBadge, IonButton, IonButtons,
     IonLabel, IonSpinner, IonItem, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar
 } from '@ionic/react';
-import { addOutline } from 'ionicons/icons';
+import { personAddOutline, peopleOutline } from 'ionicons/icons';
+
 import axios from 'axios';
 import { useAdmin } from '../context/authAdminContext';
 import { Storage } from '@ionic/storage';
@@ -39,7 +40,7 @@ const DashboardAdmin = () => {
         const fetchData = async () => {
             try {
                 const token = await storage.get("token");
-                const response = await axios.get('http://localhost:8080/admin/sellers', {
+                const response = await axios.get('http://localhost:8080/admin/sellersactive', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -70,12 +71,12 @@ const DashboardAdmin = () => {
                         </IonRouterLink>
                         {(adminData != null) && (
                             <IonRouterLink routerLink="/adminprofil">
-                                <IonNote size="large" style={{ color: 'blue', padding: '1em', fontSize: "1.15em" }}>Mr.{adminData.firstname.charAt(0).toUpperCase() + adminData.firstname.slice(1)} {adminData.lastname.toUpperCase()}</IonNote>
+                                <IonNote size="large" style={{ color: 'blue', padding: '1em', fontSize: "1.15em" }}><b>Hi,</b>  {adminData.firstname.charAt(0).toUpperCase() + adminData.firstname.slice(1)} {adminData.lastname.toUpperCase()}</IonNote>
                             </IonRouterLink>
                         )}
                     </div>
                     <IonButton color="primary" routerLink="/addseller" slot="end">
-                        <IonIcon icon={addOutline} />
+                        <IonIcon icon={personAddOutline} />
                         <IonBadge color="blue" ><b>Add seller</b></IonBadge>
                     </IonButton>
                 </IonToolbar>
@@ -95,6 +96,10 @@ const DashboardAdmin = () => {
                     <IonHeader collapse="condense">
                         <IonToolbar>
                             <IonTitle size="large">Sellers</IonTitle>
+                            <IonButton size="medium" color="warning" routerLink="/sellersdemands" slot="end">
+                            <IonIcon icon={peopleOutline} />
+                            <IonLabel ><b>Demands</b></IonLabel>
+                        </IonButton>
                         </IonToolbar>
                     </IonHeader>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {
     IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol,
     IonActionSheet,IonToast, useIonActionSheet, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonToolbar
@@ -9,12 +9,14 @@ import { chevronBackOutline } from 'ionicons/icons';
 import { Storage } from '@ionic/storage';
 import styles from './Product.module.css';
 
+
 const Seller = () => {
     const { id } = useParams();
     const [seller, setSeller] = useState(null);
     const [storage, setStorage] = useState(null);
     const [present] = useIonActionSheet();
     const [showToast, setShowToast] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         const initializeStorage = async () => {
@@ -58,7 +60,7 @@ const Seller = () => {
                 console.log('Seller deleted successfully!');
                 showDeleteToast();
                 // Redirect to /dashboard after successful deletion
-                window.location.href = '/dashboard';
+                history.push('/dashboard');
             }
         } catch (error) {
             console.error('Error deleting seller:', error);
@@ -70,6 +72,7 @@ const Seller = () => {
             setShowToast(false);
         }, 2300); // Hide the toast after 2 seconds
     };
+    console.log(seller); // Add this line before navigating to the update seller page
 
     return (
         <IonPage id="category-page" className={styles.categoryPage}>
@@ -130,7 +133,7 @@ const Seller = () => {
                                                     onDidDismiss={() => setShowToast(false)}
                                                 />
 
-                                                <IonButton size="large" color="success" style={{ width: '9em' }} routerLink={`/updateseller/${id}`}>UPDATE Seller</IonButton>
+                                                <IonButton size="large" color="success" style={{ width: '9em' }} routerLink={`/updateseller/${id}`} >UPDATE Seller</IonButton>
                                             </IonRow>
                                         </div>
                                     </IonCardContent>

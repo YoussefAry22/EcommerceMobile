@@ -29,11 +29,11 @@ public class ReqRes {
     private String firstname;
     private String lastname;
     private Long number;
-
+    private String accountState ;
     /////
     private String nameProduct;
-    private String decriptionProduct;
-    private Double priceProduct;
+    private String descriptionProduct;
+    private String price;
     private Long stockProduct;
     private Long categoryId;
 

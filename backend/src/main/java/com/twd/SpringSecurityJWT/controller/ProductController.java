@@ -48,8 +48,8 @@ public class ProductController {
     public Product addProduct(@RequestBody ReqRes productRequest, @AuthenticationPrincipal OurUsers user) {
         Product product = new Product();
         product.setNameProduct(productRequest.getNameProduct());
-        product.setDecriptionProduct(productRequest.getDecriptionProduct());
-        product.setPriceProduct(productRequest.getPriceProduct());
+        product.setDescriptionProduct(productRequest.getDescriptionProduct());
+        product.setPrice(productRequest.getPrice());
         product.setStockProduct(productRequest.getStockProduct());
         return productService.addProduct(product, productRequest.getCategoryId(), user);
     }

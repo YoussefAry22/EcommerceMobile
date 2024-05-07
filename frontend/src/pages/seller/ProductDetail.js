@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
 import {
-    IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol,
-    IonActionSheet,IonToast, useIonActionSheet, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonToolbar
+    IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonRouterLink,
+    IonActionSheet, IonToast, useIonActionSheet, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonToolbar
 } from '@ionic/react';
 import { chevronBackOutline } from 'ionicons/icons';
 import { Storage } from '@ionic/storage';
@@ -15,6 +15,7 @@ const ProductDetail = () => {
     const [storage, setStorage] = useState(null);
     const [present] = useIonActionSheet();
     const [showToast, setShowToast] = useState(false);
+    const history = useHistory(); // Use useHistory hook from react-router-dom
 
     useEffect(() => {
         const initializeStorage = async () => {
@@ -50,7 +51,7 @@ const ProductDetail = () => {
         try {
             if (storage) {
                 const token = await storage.get('token');
-                await axios.delete(`http://localhost:8080/admin/product/${id}`, {
+                await axios.delete(`http://localhost:8080/users/products/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -58,19 +59,21 @@ const ProductDetail = () => {
                 console.log('Product deleted successfully!');
                 showDeleteToast();
                 // Redirect to /dashboard after successful deletion
-                window.location.href = '/dashboard';
+                setTimeout(() => {
+                    // Redirect to /store after successful deletion
+                    history.push('/store');
+                }, 2300);
             }
         } catch (error) {
             console.error('Error deleting product:', error);
         }
     };
+
     const showDeleteToast = () => {
         setShowToast(true);
-        setTimeout(() => {
-            setShowToast(false);
-        }, 2300); // Hide the toast after 2 seconds
     };
 
+    console.log(product);
     return (
         <IonPage id="category-page" className={styles.categoryPage}>
             <IonHeader>
@@ -90,32 +93,25 @@ const ProductDetail = () => {
                                 <IonCard className={styles.categoryCard}>
                                     <IonCardHeader className={styles.productCardHeader}>
                                         <img src={product.image} alt="product pic" />
-                                        <p className="ion-text-wrap">{product.firstname} {product.lastname}</p>
+                                        <p className="ion-text-wrap">{product.nameProduct} {product.priceProduct}TND</p>
                                     </IonCardHeader>
                                     <IonCardContent className={styles.categoryCardContent}>
-                                        <div className={styles.productPrice}>
+                                        <div className={styles.priceProduct}>
                                             <IonRow style={{ justifyContent: 'space-between', marginTop: '2em' }}>
-                                                <IonButton size="large" color="danger" style={{ marginRight: '2.5em', width: '9em' }}
+                                                <IonButton size="large" color="danger" style={{ width: '9em' }}
                                                     onClick={() =>
                                                         present({
                                                             header: 'Confirm Delete ?',
                                                             message: 'Are you sure you want to delete this product?',
                                                             buttons: [
                                                                 {
-                                                                    text: 'Delete',
+                                                                    text: 'Delete Product',
                                                                     role: 'destructive',
                                                                     handler: () => handleDeleteProduct(),
-                                                                    data: {
-                                                                        action: 'delete',
-                                                                    },
                                                                 },
-
                                                                 {
                                                                     text: 'Cancel',
                                                                     role: 'cancel',
-                                                                    data: {
-                                                                        action: 'cancel',
-                                                                    },
                                                                 },
                                                             ],
                                                         })
@@ -123,14 +119,12 @@ const ProductDetail = () => {
                                                 >
                                                     DELETE
                                                 </IonButton>
-                                                <IonToast
-                                                    isOpen={showToast}
-                                                    message="Product deleted successfully ! Redirecting dashboard..."
-                                                    duration={2300} // Duration in milliseconds
-                                                    onDidDismiss={() => setShowToast(false)}
-                                                />
+                                                {product && (
+                                                    <IonRouterLink routerLink={`/updateproduct/${id}`} state={{ product }}>
+                                                        <IonButton size="large" color="success" style={{ width: '9em' }}>UPDATE</IonButton>
+                                                    </IonRouterLink>
+                                                )}
 
-                                                <IonButton size="large" color="success" style={{ width: '9em' }} routerLink={`/updateproduct/${id}`}>UPDATE</IonButton>
                                             </IonRow>
                                         </div>
                                     </IonCardContent>
@@ -140,7 +134,12 @@ const ProductDetail = () => {
                     </IonGrid>
                 )}
             </IonContent>
-
+            <IonToast
+                isOpen={showToast}
+                message="Product deleted successfully ! Redirecting to your store..."
+                duration={2300}
+                onDidDismiss={() => setShowToast(false)}
+            />
         </IonPage>
     );
 };

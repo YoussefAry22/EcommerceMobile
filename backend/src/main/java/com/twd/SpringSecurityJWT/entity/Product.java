@@ -23,9 +23,11 @@
         private String nameProduct ;
         private String name_link ;
         private String image;
-        private String decriptionProduct;
+        private String descriptionProduct;
+//        private String price ;
+
         private String price ;
-        private Double priceProduct ;
+
         private Long stockProduct ;
 
         private LocalDateTime creationDate;
@@ -87,19 +89,19 @@
         }
 
         public String getDecriptionProduct() {
-            return decriptionProduct;
+            return descriptionProduct;
         }
 
-        public void setDecriptionProduct(String decriptionProduct) {
-            this.decriptionProduct = decriptionProduct;
+        public void setDecriptionProduct(String descriptionProduct) {
+            this.descriptionProduct = descriptionProduct;
         }
 
-        public Double getPriceProduct() {
-            return priceProduct;
+        public String getPriceProduct() {
+            return price;
         }
 
-        public void setPriceProduct(Double priceProduct) {
-            this.priceProduct = priceProduct;
+        public void setPriceProduct(String priceProduct) {
+            this.price = priceProduct;
         }
 
         public Long getStockProduct() {
@@ -140,11 +142,11 @@
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Product product = (Product) o;
-            return Objects.equals(idProduct, product.idProduct) && Objects.equals(nameProduct, product.nameProduct) && Objects.equals(decriptionProduct, product.decriptionProduct) && Objects.equals(priceProduct, product.priceProduct) && Objects.equals(user, product.user);
+            return Objects.equals(idProduct, product.idProduct) && Objects.equals(nameProduct, product.nameProduct) && Objects.equals(descriptionProduct, product.descriptionProduct) && Objects.equals(price, product.price) && Objects.equals(user, product.user);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(idProduct, nameProduct, decriptionProduct, priceProduct, user);
+            return Objects.hash(idProduct, nameProduct, descriptionProduct, price, user);
         }
     }

@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import {
+    IonLabel, IonAlert,
+    IonFab, IonFabButton,
     IonSelect, IonSelectOption,
     IonRow,
     IonPage,
     IonContent,
     IonInput,
     IonButton,
-    IonAlert,
     IonGrid,
     IonList,
     IonItem,
@@ -17,25 +18,29 @@ import {
     IonButtons,
     IonIcon,
     IonToolbar,
-    IonToast
+    IonToast,
 } from '@ionic/react';
 import { chevronBack } from "ionicons/icons";
 import { Storage } from '@ionic/storage';
-
+import { camera } from 'ionicons/icons';
+import PhotoGallery from '../PhotoGallery';
+import { usePhotoGallery } from '../hooks/usePhotoGallery';
 
 function AddProduct() {
     const [formData, setFormData] = useState({
-        name: '',
+        nameProduct: '',
         image: '',
         descriptionProduct: '',
         priceProduct: '',
         stockProduct: '',
-        category:'',
-        categoryId:''
-
+        categoryId: ''
     });
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
+    const [categories, setCategories] = useState([]); // State to store fetched categories
+    const history = useHistory(); // Import and initialize useHistory
+
+    const { photos, takePhoto, deletePhoto } = usePhotoGallery();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -54,10 +59,22 @@ function AddProduct() {
         initializeStorage();
     }, []);
 
-    const history = useHistory(); // Import and initialize useHistory
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/users/category/all');
+                setCategories(response.data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
+        fetchCategories();
+    }, []); // Fetch categories when component mounts
+
     const handleSubmit = async () => {
         try {
-            if (!formData.name || !formData.priceProduct || !formData.stockProduct || !formData.categoryId) {
+            if (!formData.nameProduct || !formData.priceProduct || !formData.stockProduct || !formData.categoryId) {
                 setError("Please fill out all required fields.");
                 throw new Error('Please fill out all required fields.');
             }
@@ -70,7 +87,7 @@ function AddProduct() {
                 },
             });
             console.log(response.data);
-            console.log("Product added successfully!");
+            console.log("Product added successfully ! Redirecting to store....");
 
             setSuccessMessage('Product added successfully!'); // Display success message
 
@@ -97,34 +114,84 @@ function AddProduct() {
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen className="ion-padding" scrollY={false}>
-            <img alt="avatar" src="../../assets/prdct.png" style={{ width:'16em',height:'15em', display: 'block', margin: '0 auto' }} />
+                <img alt="avatar" src="../../assets/prdct.png" style={{ width: '16em', height: '15em', display: 'block', margin: '0 auto' }} />
 
                 <IonGrid className="signin-container" style={{ marginTop: '2em' }}>
                     <IonList>
                         <IonItem>
-                            <IonInput name="name" value={formData.name} onIonChange={handleInputChange} label="Text input" placeholder="Products's name" required></IonInput>
+                            <IonInput
+                                name="nameProduct"
+                                value={formData.nameProduct}
+                                onIonChange={handleInputChange}
+                                label="Product Name"
+                                placeholder="Enter product name*"
+                                required
+                            />
                         </IonItem>
                         <IonItem>
-                            <IonInput name="descriptionProduct" value={formData.descriptionProduct} onIonChange={handleInputChange} label="descriptionProduct input" placeholder="Description of the product" ></IonInput>
+                            <IonInput
+                                name="descriptionProduct"
+                                value={formData.descriptionProduct}
+                                onIonChange={handleInputChange}
+                                label="Description"
+                                placeholder="Enter description*"
+                            />
                         </IonItem>
                         <IonItem>
-                            <IonInput name="priceProduct" value={formData.priceProduct} onIonChange={handleInputChange} label="priceProduct input" type="number" placeholder="Price" required></IonInput>
+                            <IonInput
+                                name="priceProduct"
+                                value={formData.priceProduct}
+                                onIonChange={handleInputChange}
+                                label="Price"
+                                type="number"
+                                placeholder="Enter price*"
+                                required
+                            />
                         </IonItem>
                         <IonItem>
-                            <IonInput name="stockProduct" value={formData.stockProduct} onIonChange={handleInputChange} label="stockProduct input" placeholder="Stock" required ></IonInput>
+                            <IonInput
+                                name="stockProduct"
+                                value={formData.stockProduct}
+                                onIonChange={handleInputChange}
+                                label="Stock"
+                                placeholder="Enter stock"
+                                required
+                            />
                         </IonItem>
                         <IonItem>
-                            <IonInput name="categoryId" value={formData.categoryId} onIonChange={handleInputChange} label="categoryId input" type="number" placeholder="CategoryId" required ></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonSelect aria-label="Category" interface="popover" placeholder="Select product's category" name="category" value={formData.category} onIonChange={handleInputChange}>
-                                <IonSelectOption value="clavier">Clavier</IonSelectOption>
-                                <IonSelectOption value="souris">Souris</IonSelectOption>
-                                <IonSelectOption value="laptop">Laptop</IonSelectOption>
+                            <IonSelect
+                                aria-label="Category"
+                                interface="popover"
+                                placeholder="Select Category*"
+                                name="categoryId"
+                                value={formData.categoryId}
+                                onIonChange={handleInputChange} required
+                            >
+                                {categories.map(category => (
+                                    <IonSelectOption key={category.id} value={category.id}>{category.name}</IonSelectOption>
+                                ))}
                             </IonSelect>
                         </IonItem>
+                        <IonItem>
+                            <IonButton id="present-alert">Images of the product</IonButton>
+                            <IonAlert
+                                trigger="present-alert"
+                                header="A Short Title Is Best"
+                                message="A message should be a short, complete sentence."
+                                buttons={['Action']}
+                            ></IonAlert>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>Images :</IonLabel>
+                            <PhotoGallery photos={photos} deletePhoto={deletePhoto} />
+                            <IonFabButton onClick={() => takePhoto()} >
+                                <IonIcon icon={camera}></IonIcon>
+                            </IonFabButton>
+                        </IonItem>
+
                     </IonList>
                 </IonGrid>
+
                 <IonRow style={{ justifyContent: 'space-between', marginTop: "1.5em" }}>
                     <IonButton color="danger" style={{ width: '7em' }} routerLink="/store" routerDirection="back" >Cancel</IonButton>
                     <IonButton color="primary" style={{ width: '7em' }} onClick={handleSubmit}>Add Product</IonButton>

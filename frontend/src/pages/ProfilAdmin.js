@@ -14,9 +14,6 @@ import { chevronBack } from 'ionicons/icons';
 
 
 const ProfilAdmin = () => {
-  const products = ProductStore.useState((s) => s.products);
-  const favourites = FavouritesStore.useState((s) => s.product_ids);
-  const shopCart = CartStore.useState((s) => s.product_ids);
   const { clearStorage } = useAdmin();
   const [storage, setStorage] = useState(null);
   const [adminData, setAdminData] = useState(null);
@@ -61,8 +58,9 @@ const ProfilAdmin = () => {
   }, [auth]);
 
   const logout = () => {
-    window.location.href = "/signinasadmin";
     clearStorage();
+
+    history.push('/signinasadmin');
   }
 
   if (auth) {

@@ -24,21 +24,32 @@ public class ProductService {
 
 
     public Product addProduct(Product product, Long categoryId, OurUsers user) {
+        // Check if the user's account state is "ACTIVE"
+        if (!user.getAccountState().equals("ACTIVE")) {
+            throw new IllegalStateException("Seller account is not active. Cannot add product.");
+        }
+
         // Set the creation date of the product
         product.setCreationDate(LocalDateTime.now());
+
         // Fetch the category from the database
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
         if (optionalCategory.isEmpty()) {
             // Handle category not found
             throw new IllegalArgumentException("Category not found with ID: " + categoryId);
         }
+
         // Associate the product with the fetched category
         product.setCategory(optionalCategory.get());
+
         // Associate the product with the user
         product.setUser(user);
+
         // You can add additional logic/validation here before saving the product
+
         return productRepository.save(product);
     }
+
 
     public Product getProductById(Long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);

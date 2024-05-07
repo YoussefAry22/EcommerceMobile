@@ -27,23 +27,23 @@ const SignUpPage = () => {
 
 
 
-  useEffect(() => {
+ useEffect(() => {
     const initializeStorage = async () => {
-        const storage = new Storage();
-        await storage.create();
-        setStorage(storage);
-        const token = await storage.get("token");
-  console.log(token)
-  if(token){
-    setAuth(true);
-
-  }
-  console.log(auth)
-  
+        const storageInstance = new Storage();
+        await storageInstance.create();
+        setStorage(storageInstance);
+        const token = await storageInstance.get("token");
+        console.log(token);
+        if (token) {
+            setAuth(true);
+        }
+        console.log(auth);
     };
 
     initializeStorage();
 }, [auth]);
+
+
   const handleSignUp = () => {
     
     const userData = {
@@ -65,15 +65,22 @@ const SignUpPage = () => {
         console.error("Signup failed:", error);
       });
   };
+
+
+  
   if(!auth){
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding" scrollY={false}>
-        <IonGrid className="signup-container">
+      <img alt="avatar" src="../../assets/signupp.png" style={{  display: 'block', margin: '0 auto'}} />
+                    <h1 className="title" style={{
+                        fontSize: '24px',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        marginTop: '-10%', color: '#333'
+                    }}>Create an account in One minute ! </h1>
+        <IonGrid className="signup-container" style={{  marginTop: '-70%'}} >
           <IonRow className="ion-align-items-center">
-            <IonCol size="12" className="ion-text-center">
-              <h1 className="title">Sign Up</h1>
-            </IonCol>
           </IonRow>
           <IonRow className="ion-align-items-center">
             <IonCol size="12">

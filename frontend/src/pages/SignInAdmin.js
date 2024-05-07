@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
+import { useHistory, Link } from "react-router-dom"; // Import useHistory from react-router-dom
 
-import {
+import {IonRouterLink,
     IonAvatar,
     IonPage,
     IonContent,
@@ -64,8 +64,7 @@ const SignInAdmin = () => {
                 await storage.set("token", response.data.token);
 
                 await checkAuthAdmin();
-                window.location.href = "/dashboard";
-
+                history.push('/dashboard');
             } else {
                 console.error("Sign in failed:", error);
                 setError("Sign in failed. Please check your credentials."); // Set error messageage
@@ -79,7 +78,7 @@ const SignInAdmin = () => {
         return (
             <IonPage>
                 <IonContent fullscreen className="ion-padding" scrollY={false}>
-                    <img alt="avatar" src="../../assets/admin.png" style={{ display: 'block', margin: '0 auto' }}/>
+                    <img alt="avatar" src="../../assets/admin.png" style={{ display: 'block', margin: '0 auto' }} />
                     <IonGrid className="signin-container" style={{ marginTop: '1.5em' }}>
                         <IonRow className="ion-align-items-center">
                             <IonCol size="12" className="ion-text-center ">
@@ -118,7 +117,16 @@ const SignInAdmin = () => {
                         <IonRow className="ion-align-items-center">
                             <IonCol size="12" className="ion-text-center">
                                 <IonText className="signup-link">
-                                    Are you having a problem ? <a href="#">Please contact department !</a>
+                                <i> Are you having a problem ? Please contact department.</i>
+                                </IonText>
+                            </IonCol>
+                        </IonRow>
+                        <IonRow className="ion-align-items-center">
+                            <IonCol size="12" className="ion-text-center">
+                                <IonText className="signup-link">
+                                    <IonRouterLink routerLink="/home" style={{ display: 'block', marginTop: '15%', textDecoration: 'none', color: '#007bff' }}>
+                                        <b>Return to Home page.</b>
+                                    </IonRouterLink>
                                 </IonText>
                             </IonCol>
                         </IonRow>

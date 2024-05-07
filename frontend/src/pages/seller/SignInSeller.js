@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
+import { useHistory, Link } from "react-router-dom"; // Import useHistory from react-router-dom
 import {
     IonAvatar,
     IonPage,
@@ -11,7 +11,8 @@ import {
     IonRow,
     IonCol,
     IonGrid,
-    IonToast // Import IonToast for error handling
+    IonToast, // Import IonToast for error handling
+    IonRouterLink
 } from "@ionic/react";
 import "../SignUpPage.css"; // Import du fichier CSS
 import { Storage } from '@ionic/storage';
@@ -130,6 +131,15 @@ const SignInSeller = () => {
                                 <br></br>
                                 <IonText className="signup-link">
                                     If you are having some problem, please contact admin !
+                                </IonText>
+                            </IonCol>
+                        </IonRow>
+                        <IonRow className="ion-align-items-center">
+                            <IonCol size="12" className="ion-text-center">
+                                <IonText className="signup-link">
+                                    <IonRouterLink routerLink="/home" style={{ display: 'block', marginTop: '4%', textDecoration: 'none', color: '#007bff' }}>
+                                        Return to Home page.
+                                    </IonRouterLink>
                                 </IonText>
                             </IonCol>
                         </IonRow>

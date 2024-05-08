@@ -153,7 +153,7 @@ const SignUpSeller = () => {
                         <IonRow className="ion-align-items-center">
                             <IonCol size="12" className="ion-text-center">
                                 <IonText className="signin-link">
-                                    Already have an account? <IonRouterLink href="/signinasseller">Sign in</IonRouterLink>
+                                    Already have an account? <IonRouterLink routerLink="/signinasseller">Sign in</IonRouterLink>
                                 </IonText>
                             </IonCol>
                         </IonRow>

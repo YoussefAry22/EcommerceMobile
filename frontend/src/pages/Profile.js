@@ -19,7 +19,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { cart, heart, cameraOutline } from "ionicons/icons";
+import { cart, heart, cameraOutline, chevronBack, chevronBackOutline } from "ionicons/icons";
 import { ProductStore } from "../data/ProductStore";
 import { FavouritesStore } from "../data/FavouritesStore";
 import { CartStore } from "../data/CartStore";
@@ -111,7 +111,8 @@ const Profile = () => {
                 text="Home"
                 routerLink="/"
                 routerDirection="back"
-              >
+                > 
+                <IonIcon color="dark" icon={chevronBackOutline} /> &nbsp;
                 Home
               </IonButton>
             </IonButtons>

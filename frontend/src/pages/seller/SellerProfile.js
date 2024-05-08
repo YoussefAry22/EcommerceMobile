@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   IonAvatar, IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonPage, IonTitle, IonToolbar,
 } from "@ionic/react";
-import { chevronBack } from "ionicons/icons";
+import { chevronBack , cameraOutline} from "ionicons/icons";
 import { useSeller } from '../../context/AuthSellerContext';
 import { useHistory } from "react-router-dom";
 import { Storage } from "@ionic/storage";
@@ -44,6 +44,10 @@ const SellerProfile = () => {
     clearStorage();
     history.push("/signinasseller");
   };
+
+  // const navigateToUpdatePhoto = () => {
+  //   history.push(`/updatephoto/${sellerData.id}`);
+  // };
 
   if (auth) {
     return (
@@ -127,6 +131,12 @@ const SellerProfile = () => {
                           <IonLabel style={{ textAlign: "center" }}>
                             {sellerData.number}
                           </IonLabel>
+                        </IonItem>
+                        <IonItem>
+                          <IonButton color="primary" style={{ marginLeft:'35%' }}>
+                            <IonIcon icon={cameraOutline} slot="start" />
+                            Update Photo
+                          </IonButton>
                         </IonItem>
 
                       </div>

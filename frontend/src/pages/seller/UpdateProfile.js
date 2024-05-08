@@ -51,6 +51,8 @@ function UpdateProfile() {
     }, []);
 
     const history = useHistory(); // Import and initialize useHistory
+
+    
     const handleSubmit = async () => {
         try {
             if (!formData.firstname || !formData.lastname || !formData.number || !formData.email || !formData.password) {

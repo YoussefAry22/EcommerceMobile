@@ -49,6 +49,7 @@ const StoreSeller = () => {
         }
     }, [seller, storage]);
 
+
     // Filter products based on search query
     useEffect(() => {
         if (searchQuery.trim() === '') {
@@ -72,14 +73,23 @@ const StoreSeller = () => {
             <IonHeader>
                 <IonToolbar>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <IonRouterLink routerLink="/sellerprofile" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
-                            <IonAvatar aria-hidden="true">
-                                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                            </IonAvatar>
-                        </IonRouterLink>
+                        {seller ? (
+                            <IonRouterLink routerLink="/sellerprofile" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
+                                <IonAvatar aria-hidden="true">
+                                <img alt="user img" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                </IonAvatar>
+                            </IonRouterLink>
+                        ) : (
+                            <IonRouterLink routerLink="/signinasseller" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
+                                <IonAvatar aria-hidden="true">
+                                <img alt="user img" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                </IonAvatar>
+                            </IonRouterLink>
+                        )}
+
                         {(seller != null) && (
                             <IonRouterLink routerLink="/sellerprofile">
-                                <IonNote size="large" style={{ color: 'blue', padding: '1em', fontSize: "1.15em" }}><b>Mr.{seller.firstname.charAt(0).toUpperCase() + seller.firstname.slice(1)} {seller.lastname.toUpperCase()}</b></IonNote>
+                                <IonNote size="large" style={{ color: 'blue', padding: '1em', fontSize: "1.15em" }}><b>Hi, {seller.firstname.charAt(0).toUpperCase() + seller.firstname.slice(1)} {seller.lastname.toUpperCase()}</b></IonNote>
                             </IonRouterLink>
                         )}
                     </div>
@@ -94,7 +104,7 @@ const StoreSeller = () => {
                 <IonHeader collapse="condense">
                     <IonToolbar>
                         <IonTitle size="large">Products</IonTitle>
-                        <IonButton size="medium" color="warning" routerLink="/addproduct" slot="end">
+                        <IonButton size="medium" color="warning" slot="end">
                             <IonIcon icon={bagCheckOutline} />
                             <IonLabel ><b>Orders</b></IonLabel>
                         </IonButton>
@@ -108,7 +118,7 @@ const StoreSeller = () => {
                             <IonCol key={`product_list_${index}`}>
                                 <IonRouterLink routerLink={`/product/${product.idProduct}`} state={{ product }}>
                                     <IonCard>
-                                        <img src={product.cover} alt="product cover" />
+                                        <img src={product.image} alt="product cover" />
                                         <IonCardContent className="categoryCardContent">
                                             <IonCardSubtitle>{`${product.nameProduct} ${product.priceProduct}`}</IonCardSubtitle>
                                             <IonCardSubtitle>{product.stockProduct}</IonCardSubtitle>

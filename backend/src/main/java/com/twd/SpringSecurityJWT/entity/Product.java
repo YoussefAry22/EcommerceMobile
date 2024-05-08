@@ -41,9 +41,9 @@
         @OneToMany(mappedBy = "product")
         private List<SavedProduct> savedProducts = new ArrayList<>();
 
-        @JsonIgnore
-        @OneToMany(mappedBy = "product")
-        private List<CartProduct> cartProducts = new ArrayList<>();
+//        @JsonIgnore
+//        @OneToMany(mappedBy = "product")
+//        private List<CartProduct> cartProducts = new ArrayList<>();
         //////
         @ManyToOne
         @JoinColumn(name = "category_id")
@@ -65,9 +65,9 @@
             this.user = user;
         }
 
-        public List<CartProduct> getLikedByUsers() {
-            return cartProducts;
-        }
+//        public List<CartProduct> getLikedByUsers() {
+//            return cartProducts;
+//        }
 
         //////////
 
@@ -128,13 +128,13 @@
             this.savedProducts = savedProducts;
         }
 
-        public List<CartProduct> getCartProducts() {
-            return cartProducts;
-        }
-
-        public void setCartProducts(List<CartProduct> cartProducts) {
-            this.cartProducts = cartProducts;
-        }
+//        public List<CartProduct> getCartProducts() {
+//            return cartProducts;
+//        }
+//
+//        public void setCartProducts(List<CartProduct> cartProducts) {
+//            this.cartProducts = cartProducts;
+//        }
 
 
         @Override

@@ -1,13 +1,12 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "ionic-ecommerce-example",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "build",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
+  "appName": "ionic-ecommerce-app",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
   },
-  "cordova": {}
+  "android": {
+    "allowMixedContent": true
+  }
 }

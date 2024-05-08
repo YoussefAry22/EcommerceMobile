@@ -24,13 +24,18 @@ public class ReqRes {
     private String email;
     private String role;
     private String password;
-    private List<Product> products;
+    private List<String> products;
     private OurUsers ourUsers;
     private String firstname;
     private String lastname;
     private Long number;
     private String accountState ;
     /////
+    private String Product;
+    private Long userId ;
+    private Long idCartProduct;
+    private Long productId ;
+    private String address;
     private String nameProduct;
     private String descriptionProduct;
     private String price;

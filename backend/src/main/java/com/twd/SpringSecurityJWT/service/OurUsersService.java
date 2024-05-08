@@ -21,7 +21,7 @@ import java.util.Optional;
     @Autowired
     private OurUserRepo ourUserRepo ;
 
-    private static final String UPLOAD_DIR = "C:\\Users\\dell\\Desktop\\EcommerceMobile\\backend\\profileimage";
+    private static final String UPLOAD_DIR = "C:\\Users\\arway\\Desktop\\EcommerceMobile\\backend\\profileimage";
 
 
     public ReqRes getAdminProfile(UserDetails userDetails) {

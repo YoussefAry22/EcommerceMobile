@@ -10,7 +10,7 @@ import {
   IonText,
   IonRow,
   IonCol,
-  IonGrid, IonHeader, IonToolbar, IonButtons,IonIcon, IonTitle, IonBadge, 
+  IonGrid, IonHeader, IonToolbar, IonButtons, IonIcon, IonTitle, IonBadge,
   IonToast // Import IonToast for error handling
 } from "@ionic/react";
 import "./SignUpPage.css"; // Import du fichier CSS
@@ -94,17 +94,23 @@ const SignIn = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen className="ion-padding" scrollY={false}>
-          <img alt="avatar" src="../../assets/signinn.png" style={{ display: 'block', margin: '20%' }} />
-          <h1 className="title" style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            textAlign: 'center',
-            margin: '-10% 0', color: '#333'
-          }}>Signin now to get all fonctionnalities ! </h1>
-          <IonGrid className="signin-container" style={{ marginTop: '25%' }}>
+          <div style={{ textAlign: 'center' }}>
+            <img alt="avatar" src="../../assets/signinn.png" style={{
+              display: 'block',
+              marginTop: '10vh', // Utilisation de vh pour centrer verticalement par rapport à la hauteur de l'écran
+              marginLeft: 'auto',
+              marginRight: 'auto', // Centrage horizontal avec des marges automatiques
+              width: '60%', // Vous pouvez ajuster la largeur selon vos besoins
+            }} />
+            <h1 className="title" style={{
+              fontSize: '24px',
+              fontWeight: 'bold',
+              color: '#333',
+              marginBottom: '15px', // Ajout de marge inférieure pour séparer l'image du texte
+            }}>Sign in now to get all functionalities!</h1>
+          </div>
+          <IonGrid className="signin-container">
             <IonRow className="ion-align-items-center">
-            </IonRow>
-            <IonRow className="ion-align-items-center ">
               <IonCol size="12">
                 <IonInput
                   type="email"
@@ -133,20 +139,28 @@ const SignIn = () => {
                 </IonButton>
               </IonCol>
             </IonRow>
-            <IonRow className="ion-align-items-center">
+            <IonRow className="ion-align-items-center" style={{ marginTop: '1vh' }}>
               <IonCol size="12" className="ion-text-center">
                 <IonText className="signup-link">
-                  Don't have an account? <a href="/signup">Sign up</a>
+                  Don't have an account? 
+                  <IonRouterLink routerLink="/signup">Sign up</IonRouterLink>
+
                 </IonText>
               </IonCol>
             </IonRow>
-            <IonRow className="ion-align-items-center">
+            <IonRow className="ion-align-items-center" style={{ marginTop: '4vh' }}>
               <IonCol size="12" className="ion-text-center">
-                <IonText className="signup-link">
-                  <IonRouterLink routerLink="/signinasseller" style={{ display: 'block', marginTop: '10%', textDecoration: 'none', color: '#007bff' }}>
+                <IonText className="signup-link" >
+                  <IonRouterLink routerLink="/signinasseller" style={{ textDecoration: 'none', color: '#007bff' }}>
                     Move to SELLER space.
                   </IonRouterLink>
-                  <IonRouterLink routerLink="/signinasadmin" style={{ display: 'block', marginTop: '10%', textDecoration: 'none', color: '#007bff' }}>
+                </IonText>
+              </IonCol>
+            </IonRow>
+            <IonRow className="ion-align-items-center" style={{ marginTop: '3vh' }}>
+              <IonCol size="12" className="ion-text-center">
+                <IonText className="signup-link" >
+                  <IonRouterLink routerLink="/signinasadmin" style={{ textDecoration: 'none', color: '#007bff' }}>
                     Move to ADMIN space.
                   </IonRouterLink>
                 </IonText>
@@ -161,6 +175,7 @@ const SignIn = () => {
             onDidDismiss={() => setError("")} // Clear error state when toast is dismissed
           />
         </IonContent>
+
       </IonPage>
     );
   } else { history.push("/home"); }

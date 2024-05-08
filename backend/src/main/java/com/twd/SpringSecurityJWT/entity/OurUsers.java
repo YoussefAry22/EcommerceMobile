@@ -47,9 +47,9 @@ public class OurUsers implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<SavedProduct> savedProducts = new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<CartProduct> likedCartProducts = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "user")
+//    private List<CartProduct> cartProducts = new ArrayList<>();
     /////
     // Define relationship with ImageOurUsers entity
     //@OneToOne(mappedBy = "ourUsers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

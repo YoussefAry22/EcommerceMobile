@@ -1,5 +1,5 @@
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { arrowRedoOutline, cart, cartOutline, chevronBackOutline, heart, heartOutline } from "ionicons/icons";
+import {  cart, cartOutline, chevronBackOutline, heart, heartOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router"
 import ProductCard from "../components/ProductCard";
@@ -59,8 +59,12 @@ const Product = () => {
                             <IonIcon color="dark" icon={chevronBackOutline} />&nbsp;{category.name}
                         </IonButton>
                     </IonButtons>
-                    <IonTitle>View Product</IonTitle>
+                    <IonTitle>Product detail</IonTitle>
                     <IonButtons slot="end">
+                        <IonBadge color="danger">{favourites.length}</IonBadge>
+                        <IonButton color="danger" routerLink="/favourites">
+                            <IonIcon icon={heart} />
+                        </IonButton>
                         <IonBadge color="dark">{shopCart.length}</IonBadge>
                         <IonButton color="dark" routerLink="/cart">
                             <IonIcon ref={cartRef} className="animate__animated" icon={cart} />
@@ -77,7 +81,6 @@ const Product = () => {
                                     <div className={styles.productCardActions}>
                                         <IonIcon className={styles.productCardAction} color={isFavourite ? "danger" : "medium"} icon={isFavourite ? heart : heartOutline} onClick={e => addProductToFavourites(e, category.slug, product.id)} />
                                         <IonIcon style={{ position: "absolute", display: "none" }} id={`placeholder_favourite_product_${category.slug}_${product.id}`} className={`${styles.productCardAction} animate__animated`} color="danger" icon={heart} />
-                                        <IonIcon className={styles.productCardAction} size="medium" icon={arrowRedoOutline} />
                                     </div>
                                     <img src={product.image} alt="product pic" />
                                     <p className="ion-text-wrap">{product.name}</p>

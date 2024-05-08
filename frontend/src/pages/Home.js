@@ -39,25 +39,27 @@ const Home = () => {
         initializeStorage();
     }, [loading]);
 
+    console.log("products");
+    console.log(products);
     useEffect(() => {
         const fetchUserPhoto = async () => {
-          if (userData) {
-            try {
-              const response = await axios.get(`http://localhost:8080/user/image/${userData.id}`, {
-                responseType: 'arraybuffer',
-              });
-              const base64String = btoa(
-                new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), ''),
-              );
-              setUserPhoto(`data:image/jpeg;base64,${base64String}`);
-            } catch (error) {
-              console.error('Error fetching user photo:', error);
+            if (userData) {
+                try {
+                    const response = await axios.get(`http://localhost:8080/user/image/${userData.id}`, {
+                        responseType: 'arraybuffer',
+                    });
+                    const base64String = btoa(
+                        new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), ''),
+                    );
+                    setUserPhoto(`data:image/jpeg;base64,${base64String}`);
+                } catch (error) {
+                    console.error('Error fetching user photo:', error);
+                }
             }
-          }
         };
-    
+
         fetchUserPhoto();
-      }, [loading, userData]);
+    }, [loading, userData]);
 
     return (
         <IonPage id="home-page">
@@ -67,19 +69,19 @@ const Home = () => {
                         {userData ? (
                             <IonRouterLink routerLink="/profile" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
                                 <IonAvatar aria-hidden="true">
-                                    <img alt="" src={userPhoto} />
+                                    <img alt="user img" src={userPhoto  } />
                                 </IonAvatar>
                             </IonRouterLink>
                         ) : (
                             <IonRouterLink routerLink="/signin" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
                                 <IonAvatar aria-hidden="true">
-                                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                    <img alt="user img" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                                 </IonAvatar>
                             </IonRouterLink>
                         )}
                         {userData && (
                             <IonRouterLink routerLink="/profile" style={{ textDecoration: 'none', color: 'inherit', marginLeft: '8px' }}>
-                                <IonTitle>{userData.firstname} {userData.lastname}</IonTitle>
+                                <IonTitle>Hi, {userData.firstname} {userData.lastname}</IonTitle>
                             </IonRouterLink>
                         )}
                     </div>
@@ -95,18 +97,12 @@ const Home = () => {
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
-
-
-
-
             <IonContent fullscreen>
                 <IonHeader collapse="condense">
                     <IonToolbar>
                         <IonTitle size="large">Categories</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-
-
                 <IonGrid>
                     <IonRow>
                         {products.map((category, index) => (

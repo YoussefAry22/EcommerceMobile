@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
     IonAvatar, IonNote, IonBadge, IonButton, IonButtons,
-    IonLabel, IonSpinner, IonItem, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar
+    IonLabel, IonSpinner, IonItem, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage,
+    IonRouterLink, IonRow, IonTitle, IonToolbar
 } from '@ionic/react';
 import { personAddOutline, peopleOutline } from 'ionicons/icons';
 
@@ -64,12 +65,20 @@ const DashboardAdmin = () => {
             <IonHeader>
                 <IonToolbar>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <IonRouterLink routerLink="/adminprofil" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
-                            <IonAvatar aria-hidden="true">
-                                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                            </IonAvatar>
-                        </IonRouterLink>
-                        {(adminData != null) && (
+                        {adminData ? (
+                            <IonRouterLink routerLink="/adminprofil" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
+                                <IonAvatar aria-hidden="true">
+                                <img alt="user img" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                </IonAvatar>
+                            </IonRouterLink>
+                        ) : (
+                            <IonRouterLink routerLink="/signinasadmin" style={{ textDecoration: 'none', color: 'inherit', padding: '0' }}>
+                                <IonAvatar aria-hidden="true">
+                                <img alt="user img" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                </IonAvatar>
+                            </IonRouterLink>
+                        )}
+                        {adminData && (
                             <IonRouterLink routerLink="/adminprofil">
                                 <IonNote size="large" style={{ color: 'blue', padding: '1em', fontSize: "1.15em" }}><b>Hi,</b>  {adminData.firstname.charAt(0).toUpperCase() + adminData.firstname.slice(1)} {adminData.lastname.toUpperCase()}</IonNote>
                             </IonRouterLink>
@@ -97,9 +106,9 @@ const DashboardAdmin = () => {
                         <IonToolbar>
                             <IonTitle size="large">Sellers</IonTitle>
                             <IonButton size="medium" color="warning" routerLink="/sellersdemands" slot="end">
-                            <IonIcon icon={peopleOutline} />
-                            <IonLabel ><b>Demands</b></IonLabel>
-                        </IonButton>
+                                <IonIcon icon={peopleOutline} />
+                                <IonLabel ><b>Demands</b></IonLabel>
+                            </IonButton>
                         </IonToolbar>
                     </IonHeader>
 

@@ -67,9 +67,9 @@ function UpdateSeller() {
                 },
             });
             console.log(response.data);
-            console.log("Seller added successfully!");
+            console.log("Seller UPDATED successfully!");
 
-            setSuccessMessage('Seller added successfully!'); // Display success message
+            setSuccessMessage('Seller UPDATED successfully!'); // Display success message
 
             // Redirect to /dashboard route after 2 seconds
             setTimeout(() => {
@@ -117,8 +117,6 @@ function UpdateSeller() {
                     <IonButton color="danger" style={{ width: '7em' }} routerLink="/dashboard" routerDirection="back" >Cancel</IonButton>
                     <IonButton color="primary" style={{ width: '7em' }} onClick={handleSubmit}>Update seller</IonButton>
                 </IonRow>
-
-
 
                 <IonToast
                     isOpen={!!error}

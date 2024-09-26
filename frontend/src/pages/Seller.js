@@ -92,7 +92,9 @@ const Seller = () => {
                             <IonCol size="12">
                                 <IonCard className={styles.categoryCard}>
                                     <IonCardHeader className={styles.productCardHeader}>
-                                        <img src={seller.image} alt="product pic" />
+                                        {/* <img src={seller.image} alt="seller pic" /> */}
+                                        <img src="https://cdn1.iconfinder.com/data/icons/professional-avatar-14/130/professional-30-512.png" alt="product pic" />
+
                                         <p className="ion-text-wrap">{seller.firstname} {seller.lastname}</p>
                                     </IonCardHeader>
                                     <IonCardContent className={styles.categoryCardContent}>

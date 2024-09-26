@@ -118,7 +118,8 @@ const DashboardAdmin = () => {
                                 <IonCol key={`seller_list_${index}`}>
                                     <IonRouterLink routerLink={`/seller/${seller.id}`} state={{ seller }}>
                                         <IonCard>
-                                            <img src={seller.cover} alt="Seller cover" />
+                                            {/* <img src={seller.cover} alt="Seller cover" /> */}
+                                            <img src="https://cdn1.iconfinder.com/data/icons/professional-avatar-14/130/professional-30-512.png" alt="Seller cover" />
                                             <IonCardContent className="categoryCardContent">
                                                 <IonCardSubtitle>{`${seller.firstname} ${seller.lastname}`}</IonCardSubtitle>
                                                 <IonCardSubtitle>{seller.email}</IonCardSubtitle>

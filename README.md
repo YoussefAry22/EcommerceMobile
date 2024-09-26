@@ -32,7 +32,7 @@ Run the project
 ### SignIn Screens
 ![Client Screen](Interfaces/signin%20client.png)
 ![Seller Screen](Interfaces/signin%20seller.png)
-![Admin Screen](Interfaces/sigin%20admin.png)
+![Admin Screen](Interfaces/signin%20admin.png)
 ### Add Seller Screen
 ![Add seller Screen](Interfaces/add%20seller.png)
 ### Add product Screen

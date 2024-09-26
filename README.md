@@ -30,6 +30,6 @@ Run the project
 ### Profile Screen
 ![Profile Screen](Interfaces/profile.png)
 ### SignIn Screens
-![Client Screen](Interfaces/signin client.png)
-![Seller Screen](Interfaces/signin seller.png)
-![Admin Screen](Interfaces/singin admin.png)
+![Client Screen](Interfaces/signin%20client.png)
+![Seller Screen](Interfaces/signin%20seller.png)
+![Admin Screen](Interfaces/singin%20admin.png)

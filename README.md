@@ -32,4 +32,12 @@ Run the project
 ### SignIn Screens
 ![Client Screen](Interfaces/signin%20client.png)
 ![Seller Screen](Interfaces/signin%20seller.png)
-![Admin Screen](Interfaces/singin%20admin.png)
+![Admin Screen](Interfaces/sigin%20admin.png)
+### Add Seller Screen
+![Add seller Screen](Interfaces/add%20seller.png)
+### Add product Screen
+![Add product Screen](Interfaces/add%20product.png)
+### Admin space Screen
+![Sellers Management Screen](Interfaces/sellers.png)
+![Sellermanagement Screen](Interfaces/seller%20gest.png)
+
